@@ -63,6 +63,7 @@ Berufssystem
 | --- | --- | ---: |
 | Baum ohne Woodcutting fällen | keine XP | 0 |
 | Moretrees-Baum ohne Forstwirtschaft: Lehrling abbauen | gesperrt | 0 |
+| Spielerplatzierten Moretrees-Stamm abbauen | erlaubt | 0 |
 | Baum mit abgeschlossenem Woodcutting-Prozess fällen | Forstwirtschaft-XP | 5 |
 | Standardsetzling wachstumsfähig pflanzen | Forstwirtschaft-XP | 5 |
 | Moretrees-Setzling ohne Forstwirtschaft: Lehrling pflanzen | Setzling ruht | 0 |

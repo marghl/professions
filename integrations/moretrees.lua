@@ -30,7 +30,11 @@ core.register_on_mods_loaded(function()
             local old_can_dig = definition.can_dig
             core.override_item(node_name, {
                 can_dig = function(pos, player)
-                    if not player or not professions.can(player, rules.advanced_tree_ability) then
+                    if not player then
+                        return false
+                    end
+                    if not professions.is_player_placed_tree(pos)
+                            and not professions.can(player, rules.advanced_tree_ability) then
                         return false
                     end
                     return not old_can_dig or old_can_dig(pos, player)

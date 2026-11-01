@@ -158,6 +158,7 @@ add("| Handlung | Ergebnis | XP |")
 add("| --- | --- | ---: |")
 add("| Baum ohne Woodcutting fällen | keine XP | 0 |")
 add("| Moretrees-Baum ohne " .. requirement(advanced_tree) .. " abbauen | gesperrt | 0 |")
+add("| Spielerplatzierten Moretrees-Stamm abbauen | erlaubt | 0 |")
 add("| Baum mit abgeschlossenem Woodcutting-Prozess fällen | "
     .. professions.branches[fell.branch].title .. "-XP | " .. fell.xp .. " |")
 add("| Standardsetzling wachstumsfähig pflanzen | "
