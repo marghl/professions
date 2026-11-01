@@ -41,7 +41,9 @@ Berufssystem
 | Fackeln herstellen | `crafting.craft.torches` | Handwerk | 2 | aktiv |
 | Holzwerkzeug herstellen | `crafting.craft.wood_tool` | Handwerk | 5 | aktiv |
 | Truhe herstellen | `crafting.craft.chest` | Handwerk | 10 | aktiv |
-| Ausgewachsene Kultur ernten | `farming.harvest_crop` | Landwirtschaft | 1 | keine |
+| Kultur der aktuellen Rangstufe ernten | `farming.harvest_current_crop` | Landwirtschaft | 1 | keine |
+| Kultur der vorherigen Rangstufe ernten | `farming.harvest_previous_crop` | Landwirtschaft | 0.2 | keine |
+| Kultur einer niedrigeren Rangstufe ernten | `farming.harvest_lower_crop` | Landwirtschaft | 0.1 | keine |
 | Baum mit Woodcutting fällen | `forestry.fell_tree` | Forstwirtschaft | 5 | keine |
 | Wachstumsfähigen Setzling pflanzen | `forestry.plant_sapling` | Forstwirtschaft | 5 | keine |
 | Ruhenden Setzling aktivieren | `forestry.activate_sapling` | Forstwirtschaft | 3 | keine |
@@ -81,8 +83,14 @@ Berufssystem
 
 ## Landwirtschaftsregeln
 
-Das Anpflanzen wird nach Kulturgruppe freigeschaltet. Eine selbst gepflanzte,
-vollständig ausgewachsene Kultur gibt beim Ernten 1 Landwirtschafts-XP.
+Das Anpflanzen wird nach Kulturgruppe freigeschaltet. Bei der Ernte einer selbst
+gepflanzten, vollständig ausgewachsenen Kultur hängt die XP von der Rangstufe ab.
+
+| Verhältnis der Kultur zum eigenen Rang | XP |
+| --- | ---: |
+| aktuelle Rangstufe | 1 |
+| eine Rangstufe niedriger | 0,2 |
+| mindestens zwei Rangstufen niedriger | 0,1 |
 
 | Rang | Kulturen |
 | --- | --- |

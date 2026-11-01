@@ -53,7 +53,23 @@ register_rank_ability("farming.crops.specialty", S("Grow specialty crops"), "far
 register_rank_ability("farming.crops.exotic", S("Grow exotic crops"), "farming", "master")
 
 professions.farming_rules = {
-    harvest_activity = "farming.harvest_crop",
+    harvest_activities = {
+        current = "farming.harvest_current_crop",
+        previous = "farming.harvest_previous_crop",
+        lower = "farming.harvest_lower_crop",
+    },
+    rank_levels = {
+        novice = 1,
+        apprentice = 2,
+        journeyman = 3,
+        master = 4,
+    },
+    ability_levels = {
+        ["farming.crops.basic"] = 1,
+        ["farming.crops.advanced"] = 2,
+        ["farming.crops.specialty"] = 3,
+        ["farming.crops.exotic"] = 4,
+    },
     crop_abilities = {
         ["farming:wheat"] = "farming.crops.basic",
         ["farming:potato"] = "farming.crops.basic",
@@ -180,10 +196,26 @@ professions.register_activity {
 }
 
 professions.register_activity {
-    id = "farming.harvest_crop",
-    title = S("Harvest mature crop"),
+    id = "farming.harvest_current_crop",
+    title = S("Harvest current-rank crop"),
     branch = "farming",
     xp = 1,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "farming.harvest_previous_crop",
+    title = S("Harvest previous-rank crop"),
+    branch = "farming",
+    xp = 0.2,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "farming.harvest_lower_crop",
+    title = S("Harvest lower-rank crop"),
+    branch = "farming",
+    xp = 0.1,
     repetition = false,
 }
 

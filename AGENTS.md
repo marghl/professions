@@ -380,8 +380,10 @@ konfigurierbare Kulturgruppen aufgeteilt: Grundkulturen fuer Pfuscher,
 regulaere Feld- und Gemuesekulturen fuer Lehrlinge, Spezialkulturen fuer
 Gesellen sowie Kaffee, Kakao und Vanille fuer Meister. Eine vollstaendig
 ausgewachsene Kultur gibt dem Spieler, der sie selbst gepflanzt und geerntet
-hat, 1 Landwirtschafts-XP. Fremde oder wild gewachsene Kulturen geben keine
-XP. Landwirtschaftliche Automatisierung bleibt einer spaeteren Qualifikation
+hat, rangabhaengige Landwirtschafts-XP: 1 XP fuer die aktuelle Kulturstufe,
+0,2 XP fuer die vorherige und 0,1 XP fuer mindestens zwei Stufen niedrigere
+Kulturen. Fremde oder wild gewachsene Kulturen geben keine XP.
+Landwirtschaftliche Automatisierung bleibt einer spaeteren Qualifikation
 vorbehalten.
 
 ### Testqualifikation
