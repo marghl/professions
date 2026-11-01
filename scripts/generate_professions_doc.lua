@@ -178,6 +178,30 @@ for _, name in ipairs(basic_saplings) do
 end
 add()
 
+local farming_rules = professions.farming_rules
+add("## Landwirtschaftsregeln")
+add()
+add("Das Anpflanzen wird nach Kulturgruppe freigeschaltet. Eine selbst gepflanzte,")
+add("vollständig ausgewachsene Kultur gibt beim Ernten 1 Landwirtschafts-XP.")
+add()
+add("| Rang | Kulturen |")
+add("| --- | --- |")
+local crops_by_ability = {}
+for crop_name, ability_id in pairs(farming_rules.crop_abilities) do
+    crops_by_ability[ability_id] = crops_by_ability[ability_id] or {}
+    table.insert(crops_by_ability[ability_id], "`" .. crop_name .. "`")
+end
+for _, ability_id in ipairs({
+    "farming.crops.basic", "farming.crops.advanced",
+    "farming.crops.specialty", "farming.crops.exotic",
+}) do
+    local crops = crops_by_ability[ability_id]
+    table.sort(crops)
+    add("| " .. requirement(professions.abilities[ability_id]) .. " | "
+        .. table.concat(crops, ", ") .. " |")
+end
+add()
+
 add("## Qualifikationen")
 add()
 add("| Anzeige | Technische ID |")

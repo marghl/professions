@@ -39,8 +39,7 @@ Das Kompetenzmodell enthält zunächst fünf Grundzweige:
 - Landwirtschaft (`farming`)
 - Forstwirtschaft (`forestry`)
 
-Alle fünf verwenden vorläufig dieselben Testränge und XP-Schwellen. Im
-Minimaltest sammelt bisher ausschließlich Handwerk tatsächlich XP.
+Alle fünf verwenden dieselben Ränge und XP-Schwellen.
 
 ## Fortschritt
 
@@ -49,6 +48,7 @@ Minimaltest sammelt bisher ausschließlich Handwerk tatsächlich XP.
 | Pfuscher | 0 |
 | Lehrling | 100 |
 | Geselle | 300 |
+| Meister | 700 |
 
 Handwerks-XP entstehen beim erfolgreichen Herstellen von Holzbrettern,
 Stöcken, Fackeln, Holzwerkzeugen und Truhen. Häufige Wiederholungen desselben
@@ -108,3 +108,12 @@ benötigen den Forstwirtschaftsrang Lehrling. Ohne diesen Rang bleiben sie
 ruhend und können später von einem Lehrling für 3 XP aktiviert werden. Die
 Stämme von Moretrees-Bäumen dürfen ebenfalls erst ab Forstwirtschaft–Lehrling
 abgebaut werden. Die Technic-Kettensäge ist noch nicht integriert.
+
+## Farming Redo
+
+Ist Farming Redo aktiviert, hängt das Anpflanzen von Kulturen vom Rang in
+Landwirtschaft ab. Pfuscher bauen Grundkulturen an, Lehrlinge die regulären
+Feld- und Gemüsekulturen, Gesellen Spezialkulturen und Meister Kaffee, Kakao
+und Vanille. Nur die Ernte einer vollständig ausgewachsenen, selbst gesetzten
+Kultur gibt 1 Landwirtschafts-XP. Landwirtschaftliche Automatisierung ist noch
+nicht integriert.

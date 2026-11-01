@@ -8,23 +8,28 @@ Berufssystem
 ├── Handwerk (crafting)
 │   ├── Pfuscher (novice) ab 0 XP
 │   ├── Lehrling (apprentice) ab 100 XP
-│   └── Geselle (journeyman) ab 300 XP
+│   ├── Geselle (journeyman) ab 300 XP
+│   └── Meister (master) ab 700 XP
 ├── Bauwesen (construction)
 │   ├── Pfuscher (novice) ab 0 XP
 │   ├── Lehrling (apprentice) ab 100 XP
-│   └── Geselle (journeyman) ab 300 XP
+│   ├── Geselle (journeyman) ab 300 XP
+│   └── Meister (master) ab 700 XP
 ├── Bergbau (mining)
 │   ├── Pfuscher (novice) ab 0 XP
 │   ├── Lehrling (apprentice) ab 100 XP
-│   └── Geselle (journeyman) ab 300 XP
+│   ├── Geselle (journeyman) ab 300 XP
+│   └── Meister (master) ab 700 XP
 ├── Landwirtschaft (farming)
 │   ├── Pfuscher (novice) ab 0 XP
 │   ├── Lehrling (apprentice) ab 100 XP
-│   └── Geselle (journeyman) ab 300 XP
+│   ├── Geselle (journeyman) ab 300 XP
+│   └── Meister (master) ab 700 XP
 └── Forstwirtschaft (forestry)
     ├── Pfuscher (novice) ab 0 XP
     ├── Lehrling (apprentice) ab 100 XP
-    └── Geselle (journeyman) ab 300 XP
+    ├── Geselle (journeyman) ab 300 XP
+    └── Meister (master) ab 700 XP
 ```
 
 ## XP-Quellen
@@ -36,6 +41,7 @@ Berufssystem
 | Fackeln herstellen | `crafting.craft.torches` | Handwerk | 2 | aktiv |
 | Holzwerkzeug herstellen | `crafting.craft.wood_tool` | Handwerk | 5 | aktiv |
 | Truhe herstellen | `crafting.craft.chest` | Handwerk | 10 | aktiv |
+| Ausgewachsene Kultur ernten | `farming.harvest_crop` | Landwirtschaft | 1 | keine |
 | Baum mit Woodcutting fällen | `forestry.fell_tree` | Forstwirtschaft | 5 | keine |
 | Wachstumsfähigen Setzling pflanzen | `forestry.plant_sapling` | Forstwirtschaft | 5 | keine |
 | Ruhenden Setzling aktivieren | `forestry.activate_sapling` | Forstwirtschaft | 3 | keine |
@@ -72,6 +78,18 @@ Berufssystem
 - `default:pine_sapling`
 - `default:sapling`
 
+## Landwirtschaftsregeln
+
+Das Anpflanzen wird nach Kulturgruppe freigeschaltet. Eine selbst gepflanzte,
+vollständig ausgewachsene Kultur gibt beim Ernten 1 Landwirtschafts-XP.
+
+| Rang | Kulturen |
+| --- | --- |
+| Landwirtschaft: Pfuscher | `farming:carrot`, `farming:cotton`, `farming:potato`, `farming:wheat` |
+| Landwirtschaft: Lehrling | `farming:barley`, `farming:beans`, `farming:beetroot`, `farming:cabbage`, `farming:corn`, `farming:cucumber`, `farming:lettuce`, `farming:melon`, `farming:oat`, `farming:onion`, `farming:pea_pod`, `farming:pumpkin`, `farming:rice`, `farming:rye`, `farming:tomato` |
+| Landwirtschaft: Geselle | `ethereal:strawberry`, `farming:artichoke`, `farming:asparagus`, `farming:blackberry`, `farming:blueberries`, `farming:chili_pepper`, `farming:eggplant`, `farming:garlic`, `farming:ginger`, `farming:grapes`, `farming:hemp`, `farming:mint`, `farming:parsley`, `farming:pepper`, `farming:pineapple`, `farming:raspberries`, `farming:rhubarb`, `farming:soy_pod`, `farming:spinach`, `farming:sunflower` |
+| Landwirtschaft: Meister | `farming:cocoa_beans`, `farming:coffee`, `farming:vanilla` |
+
 ## Qualifikationen
 
 | Anzeige | Technische ID |
@@ -88,6 +106,10 @@ Berufssystem
 | Kreissäge benutzen | `moreblocks.circular_saw.use` | Handwerk: Lehrling und Werkzeugkunde |
 | Moretrees-Setzling wachsen lassen | `moretrees.sapling.grow` | Forstwirtschaft: Lehrling |
 | Moretrees-Baum fällen | `moretrees.tree.fell` | Forstwirtschaft: Lehrling |
+| Grundkulturen anbauen | `farming.crops.basic` | Landwirtschaft: Pfuscher |
+| Fortgeschrittene Kulturen anbauen | `farming.crops.advanced` | Landwirtschaft: Lehrling |
+| Spezialkulturen anbauen | `farming.crops.specialty` | Landwirtschaft: Geselle |
+| Exotische Kulturen anbauen | `farming.crops.exotic` | Landwirtschaft: Meister |
 
 Das Platzieren der Geräte ist nicht beschränkt.
 
@@ -130,6 +152,6 @@ Die Werkbank verarbeitet 1 Gegenstand der Gruppe `wood` zu 4 × `professions:pra
 | Modname | `professions` |
 | Mindestversion | Luanti 5.4 |
 | Erforderliche Abhängigkeit | `default` |
-| Optionale Abhängigkeit | `moreblocks, moretrees, woodcutting` |
+| Optionale Abhängigkeit | `moreblocks, moretrees, woodcutting, farming` |
 | Ausgangssprache | Englisch |
 | Vorhandene Übersetzung | Deutsch |

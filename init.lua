@@ -21,6 +21,9 @@ end
 if core.get_modpath("woodcutting") then
     dofile(modpath .. "/integrations/woodcutting.lua")
 end
+if core.get_modpath("farming") then
+    dofile(modpath .. "/integrations/farming_redo.lua")
+end
 dofile(modpath .. "/commands.lua")
 
 core.log("action", "[professions] Minimal test loaded")

@@ -329,8 +329,9 @@ verwenden vorläufig folgende Raenge:
 | Geselle | 300 |
 
 Diese Werte dienen ausschliesslich dem schnellen Test und sind kein
-endgueltiges Balancing. Meister, Ingenieur, kombinierte Zweige und die
-zweiguebergreifenden Soft Caps werden erst in spaeteren Ausbaustufen getestet.
+endgueltiges Balancing. Der Meister ist als vierter Rang ab 700 XP angelegt.
+Ingenieur, kombinierte Zweige und die zweiguebergreifenden Soft Caps werden
+erst in spaeteren Ausbaustufen getestet.
 
 ### Vorlaeufige XP-Quellen
 
@@ -369,6 +370,17 @@ Forstwirtschaft–Lehrling abgebaut werden; dies gilt auch fuer Woodcutting.
 
 Die Technic-Kettensaege ist ausdruecklich noch nicht integriert. Sie wird erst
 mit einer spaeteren Technic-Integration fuer den Rang Geselle behandelt.
+
+### Landwirtschaft und Farming Redo
+
+Farming Redo ist eine optionale Integration. Das Anpflanzen ist in vier
+konfigurierbare Kulturgruppen aufgeteilt: Grundkulturen fuer Pfuscher,
+regulaere Feld- und Gemuesekulturen fuer Lehrlinge, Spezialkulturen fuer
+Gesellen sowie Kaffee, Kakao und Vanille fuer Meister. Eine vollstaendig
+ausgewachsene Kultur gibt dem Spieler, der sie selbst gepflanzt und geerntet
+hat, 1 Landwirtschafts-XP. Fremde oder wild gewachsene Kulturen geben keine
+XP. Landwirtschaftliche Automatisierung bleibt einer spaeteren Qualifikation
+vorbehalten.
 
 ### Testqualifikation
 
