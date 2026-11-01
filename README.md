@@ -3,6 +3,16 @@
 Alle sichtbaren Texte sind übersetzbar. Englisch dient als Ausgangssprache;
 eine vollständige deutsche Übersetzung liegt in `locale/professions.de.tr`.
 
+Die menschenlesbare Systemübersicht `docs/professions.md` wird aus der
+Konfiguration erzeugt:
+
+```bash
+lua scripts/generate_professions_doc.lua
+lua scripts/generate_professions_doc.lua --check
+```
+
+Die erzeugte Datei wird nicht von Hand bearbeitet.
+
 Erster vertikaler Test des geplanten Berufs- und Lernsystems für Luanti mit
 Minetest Game. Die Mod verwaltet eigene Handwerks-XP, leitet daraus Ränge ab,
 speichert die Qualifikation `tool_knowledge` und schützt Herstellung und

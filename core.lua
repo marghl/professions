@@ -4,8 +4,13 @@ local S = professions.S
 
 professions.XP_SCALE = XP_SCALE
 professions.branches = {}
+professions.branch_order = {}
 professions.qualifications = {}
+professions.qualification_order = {}
 professions.activities = {}
+professions.activity_order = {}
+professions.abilities = {}
+professions.ability_order = {}
 
 local function assert_id(value, label)
     assert(type(value) == "string" and value:match("^[a-z][a-z0-9_.-]*$"),
@@ -33,6 +38,7 @@ function professions.register_branch(def)
     assert(type(def.title) == "string" and def.title ~= "", S("Branch title missing: @1", def.id))
     assert(type(def.ranks) == "table" and #def.ranks > 0, S("Ranks missing: @1", def.id))
     professions.branches[def.id] = def
+    table.insert(professions.branch_order, def.id)
 end
 
 function professions.register_qualification(def)
@@ -41,6 +47,7 @@ function professions.register_qualification(def)
     assert(not professions.qualifications[def.id], S("Duplicate qualification ID: @1", def.id))
     assert(type(def.title) == "string" and def.title ~= "", S("Qualification title missing: @1", def.id))
     professions.qualifications[def.id] = def
+    table.insert(professions.qualification_order, def.id)
 end
 
 function professions.register_activity(def)
@@ -48,8 +55,25 @@ function professions.register_activity(def)
     assert_id(def.id, S("activity ID"))
     assert(not professions.activities[def.id], S("Duplicate activity ID: @1", def.id))
     assert_id(def.branch, S("activity branch ID"))
+    assert(type(def.title) == "string" and def.title ~= "", S("Activity title missing: @1", def.id))
     assert(type(def.xp) == "number" and def.xp > 0, S("XP must be positive: @1", def.id))
     professions.activities[def.id] = def
+    table.insert(professions.activity_order, def.id)
+end
+
+function professions.register_ability(def)
+    assert(type(def) == "table", S("Ability definition must be a table"))
+    assert_id(def.id, S("ability ID"))
+    assert(not professions.abilities[def.id], S("Duplicate ability ID: @1", def.id))
+    assert(type(def.title) == "string" and def.title ~= "", S("Ability title missing: @1", def.id))
+    assert(type(def.rank) == "table", S("Ability rank missing: @1", def.id))
+    assert_id(def.rank.branch, S("ability branch ID"))
+    assert_id(def.rank.rank, S("ability rank ID"))
+    if def.qualification then
+        assert_id(def.qualification, S("ability qualification ID"))
+    end
+    professions.abilities[def.id] = def
+    table.insert(professions.ability_order, def.id)
 end
 
 function professions.validate_config()
@@ -72,6 +96,18 @@ function professions.validate_config()
     for activity_id, activity in pairs(professions.activities) do
         assert(professions.branches[activity.branch], S("Activity @1 references unknown branch @2",
             activity_id, activity.branch))
+    end
+
+
+    for ability_id, ability in pairs(professions.abilities) do
+        local branch = professions.branches[ability.rank.branch]
+        assert(branch, S("Ability @1 references unknown branch @2", ability_id, ability.rank.branch))
+        assert(branch._rank_ids[ability.rank.rank],
+            S("Ability @1 references unknown rank @2", ability_id, ability.rank.rank))
+        if ability.qualification then
+            assert(professions.qualifications[ability.qualification],
+                S("Ability @1 references unknown qualification @2", ability_id, ability.qualification))
+        end
     end
 end
 
@@ -153,13 +189,15 @@ function professions.set_qualification(player_or_name, qualification_id, enabled
 end
 
 function professions.can(player_or_name, ability_id)
-    if ability_id == "woodworking_bench.craft" or ability_id == "moreblocks.circular_saw.craft" then
-        return professions.has_rank(player_or_name, "crafting", "apprentice")
-    elseif ability_id == "woodworking_bench.use" or ability_id == "moreblocks.circular_saw.use" then
-        return professions.has_rank(player_or_name, "crafting", "apprentice")
-            and professions.has_qualification(player_or_name, "tool_knowledge")
+    local ability = professions.abilities[ability_id]
+    if not ability then
+        return false, S("Unknown ability: @1", tostring(ability_id))
     end
-    return false, S("Unknown ability: @1", tostring(ability_id))
+    if not professions.has_rank(player_or_name, ability.rank.branch, ability.rank.rank) then
+        return false
+    end
+    return not ability.qualification
+        or professions.has_qualification(player_or_name, ability.qualification)
 end
 
 local function load_activity_state(player)

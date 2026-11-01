@@ -1,11 +1,14 @@
 local WORKBENCH_FORM = "professions:woodworking_bench"
 local S = professions.S
+local workbench = professions.workbench
 
 local function remove_one_wood(inventory)
     local list = inventory:get_list("main") or {}
     for index, stack in ipairs(list) do
-        if not stack:is_empty() and core.get_item_group(stack:get_name(), "wood") > 0 then
-            stack:take_item(1)
+        if not stack:is_empty()
+                and stack:get_count() >= workbench.input_count
+                and core.get_item_group(stack:get_name(), workbench.input_group) > 0 then
+            stack:take_item(workbench.input_count)
             inventory:set_stack("main", index, stack)
             return true
         end
@@ -51,11 +54,7 @@ core.register_node("professions:practice_part", {
 
 core.register_craft({
     output = "professions:woodworking_bench",
-    recipe = {
-        {"group:wood", "group:wood", "group:wood"},
-        {"group:wood", "default:steel_ingot", "group:wood"},
-        {"group:wood", "group:wood", "group:wood"},
-    },
+    recipe = workbench.recipe,
 })
 
 core.register_on_player_receive_fields(function(player, formname, fields)
@@ -73,7 +72,7 @@ core.register_on_player_receive_fields(function(player, formname, fields)
         return true
     end
 
-    local leftover = inventory:add_item("main", "professions:practice_part 4")
+    local leftover = inventory:add_item("main", workbench.output .. " " .. workbench.output_count)
     if not leftover:is_empty() then
         core.add_item(player:get_pos(), leftover)
     end

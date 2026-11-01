@@ -16,6 +16,10 @@ Projektkontext zu beruecksichtigen.
 Alle technischen und internen Bezeichnungen werden auf Englisch gefuehrt.
 Alle sichtbaren Texte verwenden `professions.S`. Englisch ist die
 Ausgangssprache; deutsche Übersetzungen liegen unter `locale/`.
+Die menschenlesbare Bestandsübersicht `docs/professions.md` wird mit
+`lua scripts/generate_professions_doc.lua` aus der technischen Konfiguration
+erzeugt und darf nicht von Hand gepflegt werden. Der Modus `--check` prueft,
+ob die eingecheckte Datei aktuell ist.
 Dies umfasst insbesondere Mod- und API-Namespace (`professions`), Metadaten,
 Zweig-, Rang-, Qualifikations-, Faehigkeits- und Aktivitaets-IDs, Privilegien
 sowie Chatbefehle und deren Parameter. Sichtbare Titel, Beschreibungen und
