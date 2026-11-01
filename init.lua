@@ -11,8 +11,15 @@ professions.validate_config()
 
 dofile(modpath .. "/crafting.lua")
 dofile(modpath .. "/workbench.lua")
+dofile(modpath .. "/integrations/forestry.lua")
 if core.get_modpath("moreblocks") then
     dofile(modpath .. "/integrations/moreblocks.lua")
+end
+if core.get_modpath("moretrees") then
+    dofile(modpath .. "/integrations/moretrees.lua")
+end
+if core.get_modpath("woodcutting") then
+    dofile(modpath .. "/integrations/woodcutting.lua")
 end
 dofile(modpath .. "/commands.lua")
 

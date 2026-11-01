@@ -66,7 +66,7 @@ Administratoren mit `professions_admin` können für den Test XP setzen und die
 Qualifikation verwalten:
 
 ```text
-/professions_set_xp <player> <xp>
+/professions_set_xp <player> <branch> <xp>
 /professions_qualification grant <player> tool_knowledge
 /professions_qualification revoke <player> tool_knowledge
 ```
@@ -96,3 +96,14 @@ Für die Kreissäge gelten dieselben Bedingungen wie für die Holzwerkbank:
 
 Ohne Berechtigung können keine Materialien eingelegt, Einstellungen geändert
 oder Erzeugnisse aus der Säge entnommen werden.
+
+## Forstwirtschaft
+
+Woodcutting ist der einzige Weg, durch das Fällen eines Baums XP zu erhalten.
+Ein abgeschlossener geeigneter Woodcutting-Prozess gibt 5
+Forstwirtschafts-XP; manuelles Fällen gibt keine XP.
+
+Wachstumsfähige Standardsetzlinge geben beim Pflanzen 5 XP. Moretrees-Setzlinge
+benötigen den Forstwirtschaftsrang Lehrling. Ohne diesen Rang bleiben sie
+ruhend und können später von einem Lehrling für 3 XP aktiviert werden. Die
+Technic-Kettensäge ist noch nicht integriert.

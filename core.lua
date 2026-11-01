@@ -248,26 +248,31 @@ function professions.record_activity(player_or_name, activity_id, context)
     end
 
     context = context or {}
-    local state = load_activity_state(player)
-    local state_key = activity_id .. ":" .. tostring(context.repetition_key or "default")
-    local now = os.time()
-    local factor, entry = repetition_factor(activity, state[state_key], now)
-    state[state_key] = entry
-    save_activity_state(player, state)
+    local factor = 1
+    if activity.repetition ~= false then
+        local state = load_activity_state(player)
+        local state_key = activity_id .. ":" .. tostring(context.repetition_key or "default")
+        local now = os.time()
+        local entry
+        factor, entry = repetition_factor(activity, state[state_key], now)
+        state[state_key] = entry
+        save_activity_state(player, state)
+    end
 
     local scaled_reward = math.max(1, math.floor(activity.xp * XP_SCALE * factor + 0.5))
     local old_rank = professions.get_rank(player, activity.branch)
     local new_scaled_xp = get_scaled_xp(player, activity.branch) + scaled_reward
     player:get_meta():set_int(xp_key(activity.branch), new_scaled_xp)
     local new_rank = professions.get_rank(player, activity.branch)
+    local branch = professions.branches[activity.branch]
 
     local name = player_name(player)
-    core.chat_send_player(name, S("Crafting: +@1 XP (total @2)",
+    core.chat_send_player(name, S("@1: +@2 XP (total @3)", branch.title,
         string.format("%.1f", scaled_reward / XP_SCALE),
         string.format("%.1f", new_scaled_xp / XP_SCALE)))
 
     if old_rank and new_rank and old_rank.id ~= new_rank.id then
-        core.chat_send_player(name, S("New crafting rank: @1", new_rank.title))
+        core.chat_send_player(name, S("New @1 rank: @2", branch.title, new_rank.title))
     end
     return scaled_reward / XP_SCALE
 end

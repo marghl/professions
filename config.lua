@@ -23,19 +23,20 @@ professions.register_qualification {
     title = S("Tool knowledge"),
 }
 
-local function register_apprentice_ability(id, title, qualification)
+local function register_apprentice_ability(id, title, branch, qualification)
     professions.register_ability {
         id = id,
         title = title,
-        rank = {branch = "crafting", rank = "apprentice"},
+        rank = {branch = branch, rank = "apprentice"},
         qualification = qualification,
     }
 end
 
-register_apprentice_ability("woodworking_bench.craft", S("Craft woodworking bench"))
-register_apprentice_ability("woodworking_bench.use", S("Use woodworking bench"), "tool_knowledge")
-register_apprentice_ability("moreblocks.circular_saw.craft", S("Craft circular saw"))
-register_apprentice_ability("moreblocks.circular_saw.use", S("Use circular saw"), "tool_knowledge")
+register_apprentice_ability("woodworking_bench.craft", S("Craft woodworking bench"), "crafting")
+register_apprentice_ability("woodworking_bench.use", S("Use woodworking bench"), "crafting", "tool_knowledge")
+register_apprentice_ability("moreblocks.circular_saw.craft", S("Craft circular saw"), "crafting")
+register_apprentice_ability("moreblocks.circular_saw.use", S("Use circular saw"), "crafting", "tool_knowledge")
+register_apprentice_ability("moretrees.sapling.grow", S("Grow Moretrees sapling"), "forestry")
 
 professions.workbench = {
     input_group = "wood",
@@ -47,6 +48,23 @@ professions.workbench = {
         {"group:wood", "default:steel_ingot", "group:wood"},
         {"group:wood", "group:wood", "group:wood"},
     },
+}
+
+professions.forestry_rules = {
+    basic_tree_namespace = "default",
+    basic_saplings = {
+        ["default:sapling"] = true,
+        ["default:junglesapling"] = true,
+        ["default:emergent_jungle_sapling"] = true,
+        ["default:pine_sapling"] = true,
+        ["default:acacia_sapling"] = true,
+        ["default:aspen_sapling"] = true,
+    },
+    advanced_tree_namespace = "moretrees",
+    advanced_sapling_ability = "moretrees.sapling.grow",
+    fell_activity = "forestry.fell_tree",
+    plant_activity = "forestry.plant_sapling",
+    activate_activity = "forestry.activate_sapling",
 }
 
 local repetition = {
@@ -93,4 +111,28 @@ professions.register_activity {
     branch = "crafting",
     xp = 10,
     repetition = repetition,
+}
+
+professions.register_activity {
+    id = "forestry.fell_tree",
+    title = S("Fell tree with Woodcutting"),
+    branch = "forestry",
+    xp = 5,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "forestry.plant_sapling",
+    title = S("Plant active sapling"),
+    branch = "forestry",
+    xp = 5,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "forestry.activate_sapling",
+    title = S("Activate dormant sapling"),
+    branch = "forestry",
+    xp = 3,
+    repetition = false,
 }

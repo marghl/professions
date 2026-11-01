@@ -122,12 +122,13 @@ add()
 
 add("## XP-Quellen")
 add()
-add("| Tätigkeit | Technische ID | Zweig | Grund-XP |")
-add("| --- | --- | --- | ---: |")
+add("| Tätigkeit | Technische ID | Zweig | Grund-XP | Dämpfung |")
+add("| --- | --- | --- | ---: | --- |")
 for _, activity_id in ipairs(professions.activity_order) do
     local activity = professions.activities[activity_id]
     add("| " .. activity.title .. " | `" .. activity.id .. "` | "
-        .. professions.branches[activity.branch].title .. " | " .. activity.xp .. " |")
+        .. professions.branches[activity.branch].title .. " | " .. activity.xp .. " | "
+        .. (activity.repetition == false and "keine" or "aktiv") .. " |")
 end
 add()
 
@@ -143,6 +144,36 @@ add("| Wiederholungen 7–10 | 25 % |")
 add("| Mindestfaktor ab Wiederholung 11 | "
     .. string.format("%g", repetition.minimum_factor * 100) .. " % |")
 add("| Kleinste XP-Gutschrift | " .. string.format("%g", 1 / professions.XP_SCALE) .. " XP |")
+add()
+
+local forestry = professions.forestry_rules
+local fell = professions.activities[forestry.fell_activity]
+local plant = professions.activities[forestry.plant_activity]
+local activate = professions.activities[forestry.activate_activity]
+local advanced = professions.abilities[forestry.advanced_sapling_ability]
+add("## Forstwirtschaftsregeln")
+add()
+add("| Handlung | Ergebnis | XP |")
+add("| --- | --- | ---: |")
+add("| Baum ohne Woodcutting fällen | keine XP | 0 |")
+add("| Baum mit abgeschlossenem Woodcutting-Prozess fällen | "
+    .. professions.branches[fell.branch].title .. "-XP | " .. fell.xp .. " |")
+add("| Standardsetzling wachstumsfähig pflanzen | "
+    .. professions.branches[plant.branch].title .. "-XP | " .. plant.xp .. " |")
+add("| Moretrees-Setzling ohne " .. requirement(advanced) .. " pflanzen | Setzling ruht | 0 |")
+add("| Moretrees-Setzling mit " .. requirement(advanced) .. " pflanzen | "
+    .. professions.branches[plant.branch].title .. "-XP | " .. plant.xp .. " |")
+add("| Ruhenden Moretrees-Setzling aktivieren | "
+    .. professions.branches[activate.branch].title .. "-XP | " .. activate.xp .. " |")
+add()
+add("### Berücksichtigte Standardsetzlinge")
+add()
+local basic_saplings = {}
+for name in pairs(forestry.basic_saplings) do table.insert(basic_saplings, name) end
+table.sort(basic_saplings)
+for _, name in ipairs(basic_saplings) do
+    add("- `" .. name .. "`")
+end
 add()
 
 add("## Qualifikationen")

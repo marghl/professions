@@ -350,6 +350,25 @@ Aktivitaetsklasse getrennt gefuehrt. Erste Herstellungen erhalten den vollen
 Wert; haeufige identische Wiederholungen bringen zunehmend weniger XP. Nach
 einem noch festzulegenden Zeitfenster kann sich der Ertrag erholen.
 
+### Forstwirtschaft und Moretrees
+
+Forstwirtschaft verwendet die gleichen vorlaeufigen Raenge. Pfuscher duerfen
+Standardbaeume verwenden. Moretrees-Setzlinge wachsen erst ab Lehrling; bei
+einem Pfuscher bleiben sie nach dem Platzieren ruhend und koennen spaeter von
+einem Lehrling aktiviert werden.
+
+- Ein vollstaendig ueber Woodcutting gefaellter geeigneter Baum gibt einmalig
+  5 Forstwirtschafts-XP.
+- Faellen ohne Woodcutting und das manuelle Abbauen einzelner Stamm-Nodes gibt
+  keine XP.
+- Das wachstumsfaehige Pflanzen eines beruecksichtigten Standard- oder
+  Moretrees-Setzlings gibt 5 XP.
+- Das Aktivieren eines ruhenden Moretrees-Setzlings gibt 3 XP.
+- Von Spielern platzierte Stamm-Nodes gelten nicht als XP-Baum.
+
+Die Technic-Kettensaege ist ausdruecklich noch nicht integriert. Sie wird erst
+mit einer spaeteren Technic-Integration fuer den Rang Geselle behandelt.
+
 ### Testqualifikation
 
 Die erste Qualifikation hat die interne ID `tool_knowledge`. Sie wird im Minimalsetup nur
