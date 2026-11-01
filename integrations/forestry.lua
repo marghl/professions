@@ -5,7 +5,7 @@ local storage = core.get_mod_storage()
 local rules = professions.forestry_rules
 
 local function position_key(pos)
-    return PLACED_TREE_PREFIX .. core.hash_node_position(pos)
+    return PLACED_TREE_PREFIX .. string.format("%d,%d,%d", pos.x, pos.y, pos.z)
 end
 
 function professions.is_player_placed_tree(pos)

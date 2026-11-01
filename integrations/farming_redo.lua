@@ -5,7 +5,7 @@ local marker_prefix = "farming_crop:"
 local mature_crops = {}
 
 local function marker_key(pos)
-    return marker_prefix .. core.hash_node_position(pos)
+    return marker_prefix .. string.format("%d,%d,%d", pos.x, pos.y, pos.z)
 end
 
 local function mark_planted(pos, player_name, crop_name)
