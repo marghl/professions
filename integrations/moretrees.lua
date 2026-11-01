@@ -26,7 +26,17 @@ end
 
 core.register_on_mods_loaded(function()
     for node_name, definition in pairs(core.registered_nodes) do
-        if node_name:match("^moretrees:") and core.get_item_group(node_name, "sapling") > 0 then
+        if node_name:match("^moretrees:") and core.get_item_group(node_name, "tree") > 0 then
+            local old_can_dig = definition.can_dig
+            core.override_item(node_name, {
+                can_dig = function(pos, player)
+                    if not player or not professions.can(player, rules.advanced_tree_ability) then
+                        return false
+                    end
+                    return not old_can_dig or old_can_dig(pos, player)
+                end,
+            })
+        elseif node_name:match("^moretrees:") and core.get_item_group(node_name, "sapling") > 0 then
             local old_timer = definition.on_timer
             local old_rightclick = definition.on_rightclick
             core.override_item(node_name, {

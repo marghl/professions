@@ -52,7 +52,7 @@ woodcutting.settings.on_step_hook = function(process)
         progress.awarded = true
         local player = core.get_player_by_name(process.playername)
         local rank_ok = not progress.has_moretrees
-            or professions.has_rank(player, "forestry", "apprentice")
+            or professions.can(player, rules.advanced_tree_ability)
         if player and progress.eligible and not progress.player_placed and rank_ok then
             professions.record_activity(player, rules.fell_activity)
         end

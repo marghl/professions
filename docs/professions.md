@@ -56,6 +56,7 @@ Berufssystem
 | Handlung | Ergebnis | XP |
 | --- | --- | ---: |
 | Baum ohne Woodcutting fällen | keine XP | 0 |
+| Moretrees-Baum ohne Forstwirtschaft: Lehrling abbauen | gesperrt | 0 |
 | Baum mit abgeschlossenem Woodcutting-Prozess fällen | Forstwirtschaft-XP | 5 |
 | Standardsetzling wachstumsfähig pflanzen | Forstwirtschaft-XP | 5 |
 | Moretrees-Setzling ohne Forstwirtschaft: Lehrling pflanzen | Setzling ruht | 0 |
@@ -86,6 +87,7 @@ Berufssystem
 | Kreissäge herstellen | `moreblocks.circular_saw.craft` | Handwerk: Lehrling |
 | Kreissäge benutzen | `moreblocks.circular_saw.use` | Handwerk: Lehrling und Werkzeugkunde |
 | Moretrees-Setzling wachsen lassen | `moretrees.sapling.grow` | Forstwirtschaft: Lehrling |
+| Moretrees-Baum fällen | `moretrees.tree.fell` | Forstwirtschaft: Lehrling |
 
 Das Platzieren der Geräte ist nicht beschränkt.
 

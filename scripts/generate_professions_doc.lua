@@ -151,11 +151,13 @@ local fell = professions.activities[forestry.fell_activity]
 local plant = professions.activities[forestry.plant_activity]
 local activate = professions.activities[forestry.activate_activity]
 local advanced = professions.abilities[forestry.advanced_sapling_ability]
+local advanced_tree = professions.abilities[forestry.advanced_tree_ability]
 add("## Forstwirtschaftsregeln")
 add()
 add("| Handlung | Ergebnis | XP |")
 add("| --- | --- | ---: |")
 add("| Baum ohne Woodcutting fällen | keine XP | 0 |")
+add("| Moretrees-Baum ohne " .. requirement(advanced_tree) .. " abbauen | gesperrt | 0 |")
 add("| Baum mit abgeschlossenem Woodcutting-Prozess fällen | "
     .. professions.branches[fell.branch].title .. "-XP | " .. fell.xp .. " |")
 add("| Standardsetzling wachstumsfähig pflanzen | "

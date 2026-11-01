@@ -37,6 +37,7 @@ register_apprentice_ability("woodworking_bench.use", S("Use woodworking bench"),
 register_apprentice_ability("moreblocks.circular_saw.craft", S("Craft circular saw"), "crafting")
 register_apprentice_ability("moreblocks.circular_saw.use", S("Use circular saw"), "crafting", "tool_knowledge")
 register_apprentice_ability("moretrees.sapling.grow", S("Grow Moretrees sapling"), "forestry")
+register_apprentice_ability("moretrees.tree.fell", S("Fell Moretrees tree"), "forestry")
 
 professions.workbench = {
     input_group = "wood",
@@ -62,6 +63,7 @@ professions.forestry_rules = {
     },
     advanced_tree_namespace = "moretrees",
     advanced_sapling_ability = "moretrees.sapling.grow",
+    advanced_tree_ability = "moretrees.tree.fell",
     fell_activity = "forestry.fell_tree",
     plant_activity = "forestry.plant_sapling",
     activate_activity = "forestry.activate_sapling",

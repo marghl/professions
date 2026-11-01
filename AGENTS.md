@@ -355,7 +355,8 @@ einem noch festzulegenden Zeitfenster kann sich der Ertrag erholen.
 Forstwirtschaft verwendet die gleichen vorlaeufigen Raenge. Pfuscher duerfen
 Standardbaeume verwenden. Moretrees-Setzlinge wachsen erst ab Lehrling; bei
 einem Pfuscher bleiben sie nach dem Platzieren ruhend und koennen spaeter von
-einem Lehrling aktiviert werden.
+einem Lehrling aktiviert werden. Stamm-Nodes aus Moretrees duerfen erst ab
+Forstwirtschaft–Lehrling abgebaut werden; dies gilt auch fuer Woodcutting.
 
 - Ein vollstaendig ueber Woodcutting gefaellter geeigneter Baum gibt einmalig
   5 Forstwirtschafts-XP.

@@ -13,6 +13,7 @@ Use woodworking bench=
 Craft circular saw=
 Use circular saw=
 Grow Moretrees sapling=
+Fell Moretrees tree=
 Craft wooden planks=
 Craft sticks=
 Craft torches=

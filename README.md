@@ -106,4 +106,5 @@ Forstwirtschafts-XP; manuelles Fällen gibt keine XP.
 Wachstumsfähige Standardsetzlinge geben beim Pflanzen 5 XP. Moretrees-Setzlinge
 benötigen den Forstwirtschaftsrang Lehrling. Ohne diesen Rang bleiben sie
 ruhend und können später von einem Lehrling für 3 XP aktiviert werden. Die
-Technic-Kettensäge ist noch nicht integriert.
+Stämme von Moretrees-Bäumen dürfen ebenfalls erst ab Forstwirtschaft–Lehrling
+abgebaut werden. Die Technic-Kettensäge ist noch nicht integriert.
