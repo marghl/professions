@@ -18,9 +18,11 @@ local function read_marker(pos)
     return player_name, crop_name
 end
 
-local function crop_at(pos, crop_name)
+local function planted_crop_at(pos, plant)
     local node = core.get_node_or_nil(pos)
-    return node and (node.name == crop_name or node.name:sub(1, #crop_name + 1) == crop_name .. "_")
+    return node and (node.name == plant.seed
+        or node.name == plant.crop
+        or node.name:sub(1, #plant.crop + 1) == plant.crop .. "_")
 end
 
 core.register_on_mods_loaded(function()
@@ -53,11 +55,11 @@ core.register_on_mods_loaded(function()
                         local result = old_on_place(itemstack, placer, pointed_thing)
                         if pointed_thing and pointed_thing.type == "node" then
                             if core.get_node(pointed_thing.above).name ~= before_above
-                                    and crop_at(pointed_thing.above, plant.crop) then
+                                    and planted_crop_at(pointed_thing.above, plant) then
                                 mark_planted(pointed_thing.above,
                                     placer:get_player_name(), plant.crop)
                             elseif core.get_node(pointed_thing.under).name ~= before_under
-                                    and crop_at(pointed_thing.under, plant.crop) then
+                                    and planted_crop_at(pointed_thing.under, plant) then
                                 mark_planted(pointed_thing.under,
                                     placer:get_player_name(), plant.crop)
                             end
