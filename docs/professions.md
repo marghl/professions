@@ -1,188 +1,182 @@
-# Berufs- und Lernsystem
+# Berufe – Übersicht
 
-Diese Datei gibt einen menschenlesbaren Überblick über das Berufs- und
-Lernsystem des Servers. Sie beschreibt die fachliche Idee und den aktuellen
-Stand, ohne die technischen Konfigurationsdateien zu ersetzen.
+Diese Datei zeigt den aktuell eingerichteten Stand des Berufssystems in
+menschenlesbarer Form. Verbindlich für den Server bleiben die technischen
+Konfigurationsdateien.
 
-## Grundidee
+## Berufsbaum
 
-Spieler lernen durch passende Tätigkeiten. Dabei sammeln sie Erfahrung in
-einzelnen Tätigkeitszweigen und steigen innerhalb dieser Zweige im Rang auf.
-Zusätzliche Qualifikationen oder Lizenzen weisen eine Ausbildung, Einweisung
-oder Prüfung nach.
+```text
+Berufssystem
+├── Handwerk
+│   ├── Pfuscher      ab   0 XP
+│   ├── Lehrling      ab 100 XP
+│   └── Geselle       ab 300 XP
+├── Bauwesen
+│   ├── Pfuscher      ab   0 XP
+│   ├── Lehrling      ab 100 XP
+│   └── Geselle       ab 300 XP
+├── Bergbau
+│   ├── Pfuscher      ab   0 XP
+│   ├── Lehrling      ab 100 XP
+│   └── Geselle       ab 300 XP
+├── Landwirtschaft
+│   ├── Pfuscher      ab   0 XP
+│   ├── Lehrling      ab 100 XP
+│   └── Geselle       ab 300 XP
+└── Forstwirtschaft
+    ├── Pfuscher      ab   0 XP
+    ├── Lehrling      ab 100 XP
+    └── Geselle       ab 300 XP
+```
 
-Das System verbindet deshalb zwei unterschiedliche Arten von Fortschritt:
+Derzeit sammelt nur **Handwerk** tatsächlich XP. Die übrigen vier Zweige sind
+angelegt, besitzen aber noch keine XP-Quellen oder besonderen Freigaben.
 
-- **Rang:** entsteht vor allem durch praktische Erfahrung.
-- **Qualifikation oder Lizenz:** wird durch eine Ausbildung, Prüfung oder
-  vergleichbare Freigabe erworben.
+## Handwerks-XP
 
-Eine Fähigkeit kann nur einen bestimmten Rang, nur eine Qualifikation oder
-beides gleichzeitig verlangen.
-
-## Freies Lernen und Spezialisierung
-
-Jeder Spieler darf grundsätzlich alle Zweige lernen. Es gibt keine feste
-Klassenwahl und keine harte Obergrenze für die Zahl der Berufe.
-
-Breite Grundkenntnisse sollen gut erreichbar sein. Hohe Ränge werden dagegen
-zunehmend aufwendig. Dadurch entsteht eine natürliche Spezialisierung, ohne
-Spieler dauerhaft von anderen Lernwegen auszuschließen.
-
-Als langfristige Orientierung gilt:
-
-- Pfuscher und Lehrling sollen in vielen Zweigen erreichbar sein.
-- Gesellenränge stellen eine erste deutliche Spezialisierung dar.
-- Meister sollen selten und besonders wertvoll sein.
-- Ingenieursränge bilden sehr aufwendige Spitzenqualifikationen.
-
-Diese Verteilung wird durch steigenden Aufwand erzeugt, nicht durch starre
-Verbote.
-
-## Grundzweige
-
-Das System beginnt mit fünf breiten Tätigkeitszweigen:
-
-### Handwerk
-
-Handwerk umfasst das Herstellen und Bearbeiten von Werkzeugen, Bauteilen und
-Gebrauchsgegenständen. Der erste spielbare Test konzentriert sich auf diesen
-Zweig.
-
-### Bauwesen
-
-Bauwesen umfasst geplantes Bauen, konstruktive Arbeiten und später mögliche
-Spezialisierungen wie Straßenbau, Tiefbau oder Festungsbau.
-
-### Bergbau
-
-Bergbau umfasst das Erschließen von Lagerstätten, den Abbau von Gestein und
-Erzen sowie später den Betrieb technischer Bergbausysteme.
-
-### Landwirtschaft
-
-Landwirtschaft umfasst Anbau, Pflege und Ernte von Nutzpflanzen. Spätere
-Spezialisierungen können beispielsweise Ackerbau, Gartenbau oder
-Pflanzenzucht sein.
-
-### Forstwirtschaft
-
-Forstwirtschaft umfasst nachhaltige Holzgewinnung, Aufforstung und den Umgang
-mit unterschiedlichen Baumarten.
-
-## Ränge
-
-Die gegenwärtige Testfassung verwendet in allen fünf Grundzweigen zunächst
-dieselben drei Ränge:
-
-| Rang | Vorläufige XP-Schwelle |
+| Erfolgreich hergestellter Gegenstand | Grund-XP |
 | --- | ---: |
-| Pfuscher | 0 |
-| Lehrling | 100 |
-| Geselle | 300 |
+| Holzbretter | 1 |
+| Stöcke | 1 |
+| Fackeln | 2 |
+| Holzwerkzeug | 5 |
+| Truhe | 10 |
 
-Die Werte dienen dem Testbetrieb und stellen noch kein endgültiges Balancing
-dar. Meister- und Ingenieursränge werden später ergänzt.
+### Wiederholungsdämpfung
 
-## Qualifikationen und Lizenzen
+Die Wiederholungen werden für eine Stunde getrennt nach hergestelltem
+Gegenstand gezählt.
 
-Qualifikationen bleiben von den Erfahrungsrängen getrennt. Dadurch kann ein
-Spieler viel praktische Erfahrung besitzen, aber für eine besondere Maschine
-oder eine sicherheitsrelevante Tätigkeit weiterhin eine Einweisung benötigen.
+| Wiederholung innerhalb einer Stunde | Anteil der Grund-XP |
+| --- | ---: |
+| 1–3 | 100 % |
+| 4–6 | 50 % |
+| 7–10 | 25 % |
+| ab 11 | 10 % |
 
-Die erste Testqualifikation ist **Werkzeugkunde**. Sie wird momentan durch
-einen Administrator vergeben. Später kann die Ausbildung durch ein externes
-System erfolgen; Epic ist dafür ein mögliches Beispiel, aber keine feste
-Abhängigkeit des Berufssystems.
+Die kleinste tatsächlich vergebene Menge beträgt 0,1 XP.
 
-## Aktueller Handwerkstest
+## Qualifikationen
 
-Nur der Zweig Handwerk besitzt derzeit konkrete XP-Quellen und
-Berechtigungsprüfungen. Handwerks-XP entstehen beim Herstellen von:
+| Qualifikation | Vergabe | Derzeit benötigt für |
+| --- | --- | --- |
+| Werkzeugkunde | Administrativer Befehl | Benutzung von Holzwerkbank und Kreissäge |
 
-- Holzbrettern
-- Stöcken
-- Fackeln
-- Holzwerkzeugen
-- Truhen
+Qualifikationen sind unabhängig vom Rang. Ein Spieler kann deshalb den
+benötigten Rang besitzen, ohne bereits die erforderliche Qualifikation zu
+haben.
 
-Viele identische Wiederholungen geben innerhalb eines Zeitfensters zunehmend
-weniger Erfahrung. Damit soll einfaches Massen-Crafting als alleinige
-Fortschrittsquelle unattraktiv werden.
+## Holzwerkbank
 
-### Holzwerkbank
+| Handlung | Voraussetzung |
+| --- | --- |
+| Herstellen | Handwerk: Lehrling |
+| Benutzen | Handwerk: Lehrling und Werkzeugkunde |
+| Platzieren | frei |
 
-Die Holzwerkbank ist das erste Testgerät:
+### Rezept
 
-- Herstellung ab Handwerksrang Lehrling
-- Benutzung ab Lehrling mit Werkzeugkunde
-- Platzieren für alle Spieler erlaubt
+```text
+Holz  Holz         Holz
+Holz  Stahlbarren  Holz
+Holz  Holz         Holz
+```
 
-Sie verarbeitet einen Holzblock zu vier Übungsbauteilen.
+Ein Holzblock wird an der Werkbank in vier Übungsbauteile umgewandelt.
 
-### Moreblocks-Kreissäge
+## Moreblocks-Kreissäge
 
-Wenn Moreblocks installiert ist, gelten für dessen Kreissäge dieselben
-Voraussetzungen wie für die Holzwerkbank. Die Kreissäge ersetzt die Werkbank
-nicht; beide bleiben verfügbar.
+Die Kreissäge wird nur eingebunden, wenn Moreblocks installiert ist.
 
-Treppen und Platten bleiben grundlegende Inhalte und dürfen ohne Berufsrang
-hergestellt werden.
+| Handlung | Voraussetzung |
+| --- | --- |
+| Herstellen | Handwerk: Lehrling |
+| Benutzen und Inventar bedienen | Handwerk: Lehrling und Werkzeugkunde |
+| Platzieren | frei |
 
-## Abhängige und kombinierte Zweige
+Die Kreissäge ersetzt die Holzwerkbank nicht. Treppen und Platten bleiben
+ohne Berufsausbildung herstellbar.
 
-Spätere Zweige dürfen Voraussetzungen besitzen und tiefer im Lernmodell
-beginnen. Ein fortgeschrittener Zweig kann Erfahrung und Abschlüsse aus
-mehreren Grundzweigen verbinden.
+## Verwaltungsrechte
 
-Ein mögliches Beispiel ist ein Bergbaumeister-Zweig, der fortgeschrittenes
-Bauwesen, Bergbauerfahrung und eine Untertagebau-Qualifikation voraussetzt.
-Dieser Zweig könnte Fähigkeiten für Minenplanung, Minecarts, Förderanlagen
-und Liftsysteme eröffnen.
+| Recht | Bedeutung |
+| --- | --- |
+| `professions_admin` | Darf Berufs-XP und Qualifikationen verwalten |
 
-Das Erfüllen der Voraussetzungen verleiht nicht automatisch einen hohen Rang
-im neuen Zweig. Es öffnet lediglich den neuen Lernweg, der anschließend eigene
-Erfahrung besitzt.
+Das Recht wird im Einzelspielermodus und an Serveradministratoren automatisch
+vergeben.
 
-## Einbindung des Modsets
+## Befehle
 
-Langfristig können Tätigkeiten und Berechtigungen aus dem gesamten Modset in
-das Lernsystem einfließen. Dabei sollen allgemeine Material- und
-Gegenstandsgruppen möglichst viele Mods gemeinsam abdecken. Große Systeme wie
-Moreblocks, Technic, Pipeworks, Farming oder Minecarts können bei Bedarf eigene
-Adapter erhalten.
+| Befehl | Berechtigung | Wirkung |
+| --- | --- | --- |
+| `/professions_status` | alle | Eigenen Handwerksstand anzeigen |
+| `/professions_status <spieler>` | `professions_admin` | Handwerksstand eines Onlinespielers anzeigen |
+| `/professions_set_xp <spieler> <xp>` | `professions_admin` | Handwerks-XP eines Onlinespielers setzen |
+| `/professions_qualification grant <spieler> tool_knowledge` | `professions_admin` | Werkzeugkunde vergeben |
+| `/professions_qualification revoke <spieler> tool_knowledge` | `professions_admin` | Werkzeugkunde entziehen |
 
-Die technische Umsetzung soll Regeln beim Serverstart vorbereiten, damit eine
-Spieleraktion nur die tatsächlich passenden Zweige prüft. Auch bei vielen
-Zweigen dürfen nicht sämtliche Berufsregeln für jeden abgebauten oder
-platzierten Block durchsucht werden.
+Der Zielspieler muss bei administrativen Änderungen online sein.
 
-XP-Meldungen und Speichervorgänge sollen bei zunehmender Zahl von Tätigkeiten
-gebündelt werden. Dadurch bleibt das System auch mit vielen Berufszweigen und
-mehr als zehn gleichzeitig aktiven Spielern tragfähig.
+## Technische Zuordnung
 
-## Aktueller Projektstand
+Die folgenden Bezeichnungen sind für Konfiguration, Fehlersuche und
+Anbindungen anderer Mods relevant.
 
-- Fünf Grundzweige sind angelegt.
-- Handwerk ist als erster vertikaler Test spielbar.
-- Werkzeugkunde ist die erste Qualifikation.
-- Holzwerkbank und optionale Moreblocks-Kreissäge sind integriert.
-- Deutsche und englische Texte sind vorhanden.
-- Die Mod ist im Docker-Branch `testing` eingebunden.
-- Die weiteren vier Grundzweige besitzen noch keine XP-Quellen oder Rechte.
+### Zweige
 
-Neue Zweige, konkrete XP-Quellen, Voraussetzungen und Berechtigungen werden
-schrittweise geplant, umgesetzt und zunächst im Branch `testing` erprobt. Erst
-nach erfolgreichem Test werden sie für eine Übernahme nach `main` vorgesehen.
+| Anzeige | Technische ID |
+| --- | --- |
+| Handwerk | `crafting` |
+| Bauwesen | `construction` |
+| Bergbau | `mining` |
+| Landwirtschaft | `farming` |
+| Forstwirtschaft | `forestry` |
 
-## Verhältnis zu den Konfigurationsdateien
+### Ränge und Qualifikation
 
-Diese Datei erklärt das fachliche Modell. Die Konfigurationsdateien sind die
-technische Dokumentation und die verbindliche maschinenlesbare Definition des
-jeweiligen Stands.
+| Anzeige | Technische ID |
+| --- | --- |
+| Pfuscher | `novice` |
+| Lehrling | `apprentice` |
+| Geselle | `journeyman` |
+| Werkzeugkunde | `tool_knowledge` |
 
-Bei einer Änderung des Systems sollen deshalb beide Ebenen gepflegt werden:
+### Gegenstände und Geräte
 
-1. Die Konfiguration beschreibt exakt, was der Server ausführt.
-2. Diese Datei erklärt verständlich, was Spieler und Administratoren davon
-   erwarten können.
+| Anzeige | Technischer Name |
+| --- | --- |
+| Holzwerkbank | `professions:woodworking_bench` |
+| Übungsbauteil | `professions:practice_part` |
+| Moreblocks-Kreissäge | `moreblocks:circular_saw` |
+
+### Handwerksaktivitäten
+
+| Aktivität | Technische ID |
+| --- | --- |
+| Holzbretter herstellen | `crafting.craft.planks` |
+| Stöcke herstellen | `crafting.craft.sticks` |
+| Fackeln herstellen | `crafting.craft.torches` |
+| Holzwerkzeug herstellen | `crafting.craft.wood_tool` |
+| Truhe herstellen | `crafting.craft.chest` |
+
+### Fähigkeitsprüfungen
+
+| Prüfung | Technische ID |
+| --- | --- |
+| Holzwerkbank herstellen | `woodworking_bench.craft` |
+| Holzwerkbank benutzen | `woodworking_bench.use` |
+| Kreissäge herstellen | `moreblocks.circular_saw.craft` |
+| Kreissäge benutzen | `moreblocks.circular_saw.use` |
+
+## Installation und Abhängigkeiten
+
+| Eigenschaft | Einstellung |
+| --- | --- |
+| Modname | `professions` |
+| Mindestversion | Luanti 5.4 |
+| Erforderliche Abhängigkeit | `default` |
+| Optionale Abhängigkeit | `moreblocks` |
+| Ausgangssprache | Englisch |
+| Vorhandene Übersetzung | Deutsch |
