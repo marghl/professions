@@ -121,3 +121,18 @@ Kultur gibt Landwirtschafts-XP. Jede Kulturgruppe besitzt 1 Grund-XP. Der
 zentrale Progressionsalgorithmus multipliziert diesen Wert für jede Stufe
 Rangabstand erneut mit 0,5; die Mindestgutschrift beträgt 0,1 XP.
 Landwirtschaftliche Automatisierung ist noch nicht integriert.
+
+## Bauwesen
+
+Bauwesen schränkt das Platzieren nicht ein. Alle Tätigkeiten liegen auf der
+Grundstufe: Treppen, Slabs, Wände und Zäune geben 5 Grund-XP; Türen, Fenster,
+Homedecor- und Moreblocks-Elemente geben 10 Grund-XP. Die zentrale Progression
+reduziert den Ertrag in höheren Rängen, vergibt aber immer mindestens 0,1 XP.
+
+## Bergbau
+
+Bergbau schränkt den Abbau nicht ein und verwendet ausschließlich Tätigkeiten
+der Grundstufe. Natürliches Gestein gibt 1, gewöhnliches Erz 3, wertvolles Erz
+5 und seltenes Erz 10 Grund-XP. Diamant, Moreores-Mithril und Technic-Uran
+gelten als selten. Spielerplatzierte Gesteins- und Erz-Nodes geben beim Abbau
+keine Bergbau-XP.

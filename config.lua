@@ -109,6 +109,66 @@ professions.farming_rules = {
     },
 }
 
+professions.construction_rules = {
+    basic_activity = "construction.place.basic_element",
+    special_activity = "construction.place.special_element",
+    basic_namespaces = {
+        stairs = true,
+        walls = true,
+    },
+    basic_groups = {
+        stair = true,
+        slab = true,
+        wall = true,
+        fence = true,
+    },
+    special_namespaces = {
+        doors = true,
+        xpanes = true,
+        moreblocks = true,
+        homedecor = true,
+        lrfurn = true,
+        building_blocks = true,
+        fake_fire = true,
+        itemframes = true,
+        lavalamp = true,
+    },
+    special_nodes = {
+        ["default:glass"] = true,
+        ["default:obsidian_glass"] = true,
+    },
+}
+
+professions.mining_rules = {
+    placed_marker_prefix = "mining_placed:",
+    activities = {
+        stone = "mining.dig.stone",
+        common_ore = "mining.dig.common_ore",
+        valuable_ore = "mining.dig.valuable_ore",
+        rare_ore = "mining.dig.rare_ore",
+    },
+    common_ores = {
+        ["default:stone_with_coal"] = true,
+        ["default:stone_with_iron"] = true,
+        ["default:stone_with_copper"] = true,
+        ["default:stone_with_tin"] = true,
+    },
+    valuable_ores = {
+        ["default:stone_with_gold"] = true,
+        ["default:stone_with_mese"] = true,
+        ["moreores:mineral_silver"] = true,
+        ["technic:mineral_chromium"] = true,
+        ["technic:mineral_zinc"] = true,
+        ["technic:mineral_lead"] = true,
+        ["technic:mineral_sulfur"] = true,
+    },
+    rare_ores = {
+        ["default:stone_with_diamond"] = true,
+        ["moreores:mineral_mithril"] = true,
+        ["technic:mineral_uranium"] = true,
+    },
+}
+
 professions.workbench = {
     input_group = "wood",
     input_count = 1,
@@ -145,6 +205,60 @@ local repetition = {
     window = 3600,
     full_reward_count = 3,
     minimum_factor = 0.1,
+}
+
+professions.register_activity {
+    id = "construction.place.basic_element",
+    title = S("Place basic building element"),
+    branch = "construction",
+    rank = "novice",
+    xp = 5,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "construction.place.special_element",
+    title = S("Place door, window, Homedecor or Moreblocks element"),
+    branch = "construction",
+    rank = "novice",
+    xp = 10,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "mining.dig.stone",
+    title = S("Mine natural stone"),
+    branch = "mining",
+    rank = "novice",
+    xp = 1,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "mining.dig.common_ore",
+    title = S("Mine common ore"),
+    branch = "mining",
+    rank = "novice",
+    xp = 3,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "mining.dig.valuable_ore",
+    title = S("Mine valuable ore"),
+    branch = "mining",
+    rank = "novice",
+    xp = 5,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "mining.dig.rare_ore",
+    title = S("Mine rare ore"),
+    branch = "mining",
+    rank = "novice",
+    xp = 10,
+    repetition = false,
 }
 
 professions.register_activity {

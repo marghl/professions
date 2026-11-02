@@ -36,6 +36,12 @@ Berufssystem
 
 | Tätigkeit | Technische ID | Zweig | Tätigkeitsrang | Grund-XP | Wiederholungsdämpfung |
 | --- | --- | --- | --- | ---: | --- |
+| Einfaches Bauelement platzieren | `construction.place.basic_element` | Bauwesen | Pfuscher | 5 | keine |
+| Tür, Fenster, Homedecor- oder Moreblocks-Element platzieren | `construction.place.special_element` | Bauwesen | Pfuscher | 10 | keine |
+| Natürliches Gestein abbauen | `mining.dig.stone` | Bergbau | Pfuscher | 1 | keine |
+| Gewöhnliches Erz abbauen | `mining.dig.common_ore` | Bergbau | Pfuscher | 3 | keine |
+| Wertvolles Erz abbauen | `mining.dig.valuable_ore` | Bergbau | Pfuscher | 5 | keine |
+| Seltenes Erz abbauen | `mining.dig.rare_ore` | Bergbau | Pfuscher | 10 | keine |
 | Holzbretter herstellen | `crafting.craft.planks` | Handwerk | Pfuscher | 1 | aktiv |
 | Stöcke herstellen | `crafting.craft.sticks` | Handwerk | Pfuscher | 1 | aktiv |
 | Fackeln herstellen | `crafting.craft.torches` | Handwerk | Pfuscher | 2 | aktiv |
@@ -73,6 +79,26 @@ Berufssystem
 | Wiederholungen 7–10 | 25 % |
 | Mindestfaktor ab Wiederholung 11 | 10 % |
 | Kleinste XP-Gutschrift | 0.1 XP |
+
+## Bauwesenregeln
+
+Alle Bautätigkeiten liegen auf der Grundstufe und schränken das Platzieren nicht ein.
+
+| Platzierung | Grund-XP |
+| --- | ---: |
+| Treppe, Slab, Wand oder Zaun | 5 |
+| Tür, Fenster, Homedecor- oder Moreblocks-Element | 10 |
+
+## Bergbauregeln
+
+Alle Bergbautätigkeiten liegen auf der Grundstufe. Spielerplatzierte Nodes geben keine Abbau-XP.
+
+| Abbau | Grund-XP |
+| --- | ---: |
+| natürliches Gestein | 1 |
+| gewöhnliches Erz | 3 |
+| wertvolles Erz | 5 |
+| seltenes Erz, einschließlich Diamant, Mithril und Uran | 10 |
 
 ## Forstwirtschaftsregeln
 

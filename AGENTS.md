@@ -368,9 +368,8 @@ vertikalen Durchstich durch XP, Rang, Qualifikation und Rechtepruefung ab.
 ### Grundzweige und Raenge
 
 Das System registriert die fünf Grundzweige `crafting`, `construction`,
-`mining`, `farming` und `forestry`. Im Minimaltest besitzt bisher nur
-`crafting` konkrete XP-Quellen und Berechtigungsregeln. Alle fünf Zweige
-verwenden vorläufig folgende Raenge:
+`mining`, `farming` und `forestry`. Alle fünf Zweige verwenden vorläufig
+folgende Raenge:
 
 | Rang | XP-Schwelle |
 | --- | ---: |
@@ -436,6 +435,25 @@ Multiplikator des Landwirtschaftsbaums berechnet. Fremde oder wild gewachsene
 Kulturen geben keine XP.
 Landwirtschaftliche Automatisierung bleibt einer spaeteren Qualifikation
 vorbehalten.
+
+### Bauwesen
+
+Bauwesen besitzt Raenge, aber keine rangabhaengigen Baubeschraenkungen oder
+Freischaltungen. Alle Taetigkeiten liegen auf der Grundstufe. Das Platzieren
+von Treppen, Slabs, Waenden und Zaeunen gibt 5 Grund-XP; Tueren, Fenster sowie
+Elemente aus Homedecor und Moreblocks geben 10 Grund-XP. Jede erkannte
+Platzierung gibt XP. Der zentrale Progressionsalgorithmus verringert lediglich
+den Ertrag fuer hoehere Raenge und garantiert mindestens 0.1 XP.
+
+### Bergbau
+
+Bergbau besitzt ebenfalls keine rangabhaengigen Abbaubeschraenkungen oder
+Freischaltungen; alle Taetigkeiten liegen auf der Grundstufe. Natuerliches
+Gestein gibt 1, gewoehnliche Erze 3, wertvolle Erze 5 und seltene Erze 10
+Grund-XP. Diamant, Moreores-Mithril und Technic-Uran gelten als seltene Erze.
+Spielerplatzierte Gesteins- und Erz-Nodes werden markiert und geben beim
+spaeteren Abbau keine Bergbau-XP. Automatisierter Abbau durch Maschinen ist
+noch nicht integriert.
 
 ### Testqualifikation
 

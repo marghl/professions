@@ -149,7 +149,15 @@ for _, branch_id in ipairs(professions.branch_order) do
 end
 add()
 
-local repetition = professions.activities[professions.activity_order[1]].repetition
+local repetition
+for _, activity_id in ipairs(professions.activity_order) do
+    local candidate = professions.activities[activity_id].repetition
+    if type(candidate) == "table" then
+        repetition = candidate
+        break
+    end
+end
+assert(repetition, "Keine Wiederholungsdämpfung konfiguriert")
 add("### Wiederholungsdämpfung")
 add()
 add("| Einstellung | Wert |")
@@ -161,6 +169,33 @@ add("| Wiederholungen 7–10 | 25 % |")
 add("| Mindestfaktor ab Wiederholung 11 | "
     .. string.format("%g", repetition.minimum_factor * 100) .. " % |")
 add("| Kleinste XP-Gutschrift | " .. string.format("%g", 1 / professions.XP_SCALE) .. " XP |")
+add()
+
+local construction = professions.construction_rules
+add("## Bauwesenregeln")
+add()
+add("Alle Bautätigkeiten liegen auf der Grundstufe und schränken das Platzieren nicht ein.")
+add()
+add("| Platzierung | Grund-XP |")
+add("| --- | ---: |")
+add("| Treppe, Slab, Wand oder Zaun | "
+    .. professions.activities[construction.basic_activity].xp .. " |")
+add("| Tür, Fenster, Homedecor- oder Moreblocks-Element | "
+    .. professions.activities[construction.special_activity].xp .. " |")
+add()
+
+local mining = professions.mining_rules
+add("## Bergbauregeln")
+add()
+add("Alle Bergbautätigkeiten liegen auf der Grundstufe. Spielerplatzierte Nodes geben keine Abbau-XP.")
+add()
+add("| Abbau | Grund-XP |")
+add("| --- | ---: |")
+add("| natürliches Gestein | " .. professions.activities[mining.activities.stone].xp .. " |")
+add("| gewöhnliches Erz | " .. professions.activities[mining.activities.common_ore].xp .. " |")
+add("| wertvolles Erz | " .. professions.activities[mining.activities.valuable_ore].xp .. " |")
+add("| seltenes Erz, einschließlich Diamant, Mithril und Uran | "
+    .. professions.activities[mining.activities.rare_ore].xp .. " |")
 add()
 
 local forestry = professions.forestry_rules
