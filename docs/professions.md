@@ -34,19 +34,34 @@ Berufssystem
 
 ## XP-Quellen
 
-| Tätigkeit | Technische ID | Zweig | Grund-XP | Dämpfung |
-| --- | --- | --- | ---: | --- |
-| Holzbretter herstellen | `crafting.craft.planks` | Handwerk | 1 | aktiv |
-| Stöcke herstellen | `crafting.craft.sticks` | Handwerk | 1 | aktiv |
-| Fackeln herstellen | `crafting.craft.torches` | Handwerk | 2 | aktiv |
-| Holzwerkzeug herstellen | `crafting.craft.wood_tool` | Handwerk | 5 | aktiv |
-| Truhe herstellen | `crafting.craft.chest` | Handwerk | 10 | aktiv |
-| Kultur der aktuellen Rangstufe ernten | `farming.harvest_current_crop` | Landwirtschaft | 1 | keine |
-| Kultur der vorherigen Rangstufe ernten | `farming.harvest_previous_crop` | Landwirtschaft | 0.2 | keine |
-| Kultur einer niedrigeren Rangstufe ernten | `farming.harvest_lower_crop` | Landwirtschaft | 0.1 | keine |
-| Baum mit Woodcutting fällen | `forestry.fell_tree` | Forstwirtschaft | 5 | keine |
-| Wachstumsfähigen Setzling pflanzen | `forestry.plant_sapling` | Forstwirtschaft | 5 | keine |
-| Ruhenden Setzling aktivieren | `forestry.activate_sapling` | Forstwirtschaft | 3 | keine |
+| Tätigkeit | Technische ID | Zweig | Tätigkeitsrang | Grund-XP | Wiederholungsdämpfung |
+| --- | --- | --- | --- | ---: | --- |
+| Holzbretter herstellen | `crafting.craft.planks` | Handwerk | Pfuscher | 1 | aktiv |
+| Stöcke herstellen | `crafting.craft.sticks` | Handwerk | Pfuscher | 1 | aktiv |
+| Fackeln herstellen | `crafting.craft.torches` | Handwerk | Pfuscher | 2 | aktiv |
+| Holzwerkzeug herstellen | `crafting.craft.wood_tool` | Handwerk | Pfuscher | 5 | aktiv |
+| Truhe herstellen | `crafting.craft.chest` | Handwerk | Pfuscher | 10 | aktiv |
+| Grundkultur ernten | `farming.harvest.basic` | Landwirtschaft | Pfuscher | 1 | keine |
+| Fortgeschrittene Kultur ernten | `farming.harvest.advanced` | Landwirtschaft | Lehrling | 1 | keine |
+| Spezialkultur ernten | `farming.harvest.specialty` | Landwirtschaft | Geselle | 1 | keine |
+| Exotische Kultur ernten | `farming.harvest.exotic` | Landwirtschaft | Meister | 1 | keine |
+| Standardbaum mit Woodcutting fällen | `forestry.fell.basic_tree` | Forstwirtschaft | Pfuscher | 5 | keine |
+| Fortgeschrittenen Baum mit Woodcutting fällen | `forestry.fell.advanced_tree` | Forstwirtschaft | Lehrling | 5 | keine |
+| Einfachen wachstumsfähigen Setzling pflanzen | `forestry.plant.basic_sapling` | Forstwirtschaft | Pfuscher | 5 | keine |
+| Fortgeschrittenen wachstumsfähigen Setzling pflanzen | `forestry.plant.advanced_sapling` | Forstwirtschaft | Lehrling | 5 | keine |
+| Ruhenden Setzling aktivieren | `forestry.activate_sapling` | Forstwirtschaft | Lehrling | 3 | keine |
+
+### Zentrale Rangprogression
+
+`XP = max(0,1; Grund-XP × Multiplikator ^ Rangdifferenz)`
+
+| Zweig | Multiplikator |
+| --- | ---: |
+| Handwerk | 0.5 |
+| Bauwesen | 0.5 |
+| Bergbau | 0.5 |
+| Landwirtschaft | 0.5 |
+| Forstwirtschaft | 0.5 |
 
 ### Wiederholungsdämpfung
 
@@ -66,7 +81,8 @@ Berufssystem
 | Baum ohne Woodcutting fällen | keine XP | 0 |
 | Moretrees-Baum ohne Forstwirtschaft: Lehrling abbauen | gesperrt | 0 |
 | Spielerplatzierten Moretrees-Stamm abbauen | erlaubt | 0 |
-| Baum mit abgeschlossenem Woodcutting-Prozess fällen | Forstwirtschaft-XP | 5 |
+| Standardbaum mit abgeschlossenem Woodcutting-Prozess fällen | Forstwirtschaft-XP | 5 |
+| Moretrees-Baum mit abgeschlossenem Woodcutting-Prozess fällen | Forstwirtschaft-XP | 5 |
 | Standardsetzling wachstumsfähig pflanzen | Forstwirtschaft-XP | 5 |
 | Moretrees-Setzling ohne Forstwirtschaft: Lehrling pflanzen | Setzling ruht | 0 |
 | Moretrees-Setzling mit Forstwirtschaft: Lehrling pflanzen | Forstwirtschaft-XP | 5 |
@@ -86,11 +102,8 @@ Berufssystem
 Das Anpflanzen wird nach Kulturgruppe freigeschaltet. Bei der Ernte einer selbst
 gepflanzten, vollständig ausgewachsenen Kultur hängt die XP von der Rangstufe ab.
 
-| Verhältnis der Kultur zum eigenen Rang | XP |
-| --- | ---: |
-| aktuelle Rangstufe | 1 |
-| eine Rangstufe niedriger | 0,2 |
-| mindestens zwei Rangstufen niedriger | 0,1 |
+Alle Kulturgruppen haben 1 Grund-XP. Die tatsächliche Gutschrift wird zentral
+mit dem Multiplikator des Landwirtschaftsbaums berechnet.
 
 | Rang | Kulturen |
 | --- | --- |

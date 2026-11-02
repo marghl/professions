@@ -4,6 +4,7 @@ local function register_basic_branch(id, title)
     professions.register_branch {
         id = id,
         title = title,
+        progression_multiplier = 0.5,
         ranks = {
             {id = "novice", title = S("Novice"), xp = 0},
             {id = "apprentice", title = S("Apprentice"), xp = 100},
@@ -53,22 +54,11 @@ register_rank_ability("farming.crops.specialty", S("Grow specialty crops"), "far
 register_rank_ability("farming.crops.exotic", S("Grow exotic crops"), "farming", "master")
 
 professions.farming_rules = {
-    harvest_activities = {
-        current = "farming.harvest_current_crop",
-        previous = "farming.harvest_previous_crop",
-        lower = "farming.harvest_lower_crop",
-    },
-    rank_levels = {
-        novice = 1,
-        apprentice = 2,
-        journeyman = 3,
-        master = 4,
-    },
-    ability_levels = {
-        ["farming.crops.basic"] = 1,
-        ["farming.crops.advanced"] = 2,
-        ["farming.crops.specialty"] = 3,
-        ["farming.crops.exotic"] = 4,
+    crop_activities = {
+        ["farming.crops.basic"] = "farming.harvest.basic",
+        ["farming.crops.advanced"] = "farming.harvest.advanced",
+        ["farming.crops.specialty"] = "farming.harvest.specialty",
+        ["farming.crops.exotic"] = "farming.harvest.exotic",
     },
     crop_abilities = {
         ["farming:wheat"] = "farming.crops.basic",
@@ -144,8 +134,10 @@ professions.forestry_rules = {
     advanced_tree_namespace = "moretrees",
     advanced_sapling_ability = "moretrees.sapling.grow",
     advanced_tree_ability = "moretrees.tree.fell",
-    fell_activity = "forestry.fell_tree",
-    plant_activity = "forestry.plant_sapling",
+    basic_fell_activity = "forestry.fell.basic_tree",
+    advanced_fell_activity = "forestry.fell.advanced_tree",
+    basic_plant_activity = "forestry.plant.basic_sapling",
+    advanced_plant_activity = "forestry.plant.advanced_sapling",
     activate_activity = "forestry.activate_sapling",
 }
 
@@ -159,6 +151,7 @@ professions.register_activity {
     id = "crafting.craft.planks",
     title = S("Craft wooden planks"),
     branch = "crafting",
+    rank = "novice",
     xp = 1,
     repetition = repetition,
 }
@@ -167,6 +160,7 @@ professions.register_activity {
     id = "crafting.craft.sticks",
     title = S("Craft sticks"),
     branch = "crafting",
+    rank = "novice",
     xp = 1,
     repetition = repetition,
 }
@@ -175,6 +169,7 @@ professions.register_activity {
     id = "crafting.craft.torches",
     title = S("Craft torches"),
     branch = "crafting",
+    rank = "novice",
     xp = 2,
     repetition = repetition,
 }
@@ -183,6 +178,7 @@ professions.register_activity {
     id = "crafting.craft.wood_tool",
     title = S("Craft wooden tool"),
     branch = "crafting",
+    rank = "novice",
     xp = 5,
     repetition = repetition,
 }
@@ -191,46 +187,79 @@ professions.register_activity {
     id = "crafting.craft.chest",
     title = S("Craft chest"),
     branch = "crafting",
+    rank = "novice",
     xp = 10,
     repetition = repetition,
 }
 
 professions.register_activity {
-    id = "farming.harvest_current_crop",
-    title = S("Harvest current-rank crop"),
+    id = "farming.harvest.basic",
+    title = S("Harvest basic crop"),
     branch = "farming",
+    rank = "novice",
     xp = 1,
     repetition = false,
 }
 
 professions.register_activity {
-    id = "farming.harvest_previous_crop",
-    title = S("Harvest previous-rank crop"),
+    id = "farming.harvest.advanced",
+    title = S("Harvest advanced crop"),
     branch = "farming",
-    xp = 0.2,
+    rank = "apprentice",
+    xp = 1,
     repetition = false,
 }
 
 professions.register_activity {
-    id = "farming.harvest_lower_crop",
-    title = S("Harvest lower-rank crop"),
+    id = "farming.harvest.specialty",
+    title = S("Harvest specialty crop"),
     branch = "farming",
-    xp = 0.1,
+    rank = "journeyman",
+    xp = 1,
     repetition = false,
 }
 
 professions.register_activity {
-    id = "forestry.fell_tree",
-    title = S("Fell tree with Woodcutting"),
+    id = "farming.harvest.exotic",
+    title = S("Harvest exotic crop"),
+    branch = "farming",
+    rank = "master",
+    xp = 1,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "forestry.fell.basic_tree",
+    title = S("Fell basic tree with Woodcutting"),
     branch = "forestry",
+    rank = "novice",
     xp = 5,
     repetition = false,
 }
 
 professions.register_activity {
-    id = "forestry.plant_sapling",
-    title = S("Plant active sapling"),
+    id = "forestry.fell.advanced_tree",
+    title = S("Fell advanced tree with Woodcutting"),
     branch = "forestry",
+    rank = "apprentice",
+    xp = 5,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "forestry.plant.basic_sapling",
+    title = S("Plant basic active sapling"),
+    branch = "forestry",
+    rank = "novice",
+    xp = 5,
+    repetition = false,
+}
+
+professions.register_activity {
+    id = "forestry.plant.advanced_sapling",
+    title = S("Plant advanced active sapling"),
+    branch = "forestry",
+    rank = "apprentice",
     xp = 5,
     repetition = false,
 }
@@ -239,6 +268,7 @@ professions.register_activity {
     id = "forestry.activate_sapling",
     title = S("Activate dormant sapling"),
     branch = "forestry",
+    rank = "apprentice",
     xp = 3,
     repetition = false,
 }

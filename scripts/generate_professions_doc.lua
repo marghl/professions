@@ -122,13 +122,30 @@ add()
 
 add("## XP-Quellen")
 add()
-add("| Tätigkeit | Technische ID | Zweig | Grund-XP | Dämpfung |")
-add("| --- | --- | --- | ---: | --- |")
+add("| Tätigkeit | Technische ID | Zweig | Tätigkeitsrang | Grund-XP | Wiederholungsdämpfung |")
+add("| --- | --- | --- | --- | ---: | --- |")
 for _, activity_id in ipairs(professions.activity_order) do
     local activity = professions.activities[activity_id]
+    local branch = professions.branches[activity.branch]
+    local rank_title
+    for _, rank in ipairs(branch.ranks) do
+        if rank.id == activity.rank then rank_title = rank.title end
+    end
     add("| " .. activity.title .. " | `" .. activity.id .. "` | "
-        .. professions.branches[activity.branch].title .. " | " .. activity.xp .. " | "
+        .. branch.title .. " | " .. rank_title .. " | " .. activity.xp .. " | "
         .. (activity.repetition == false and "keine" or "aktiv") .. " |")
+end
+add()
+
+add("### Zentrale Rangprogression")
+add()
+add("`XP = max(0,1; Grund-XP × Multiplikator ^ Rangdifferenz)`")
+add()
+add("| Zweig | Multiplikator |")
+add("| --- | ---: |")
+for _, branch_id in ipairs(professions.branch_order) do
+    local branch = professions.branches[branch_id]
+    add("| " .. branch.title .. " | " .. branch.progression_multiplier .. " |")
 end
 add()
 
@@ -147,8 +164,10 @@ add("| Kleinste XP-Gutschrift | " .. string.format("%g", 1 / professions.XP_SCAL
 add()
 
 local forestry = professions.forestry_rules
-local fell = professions.activities[forestry.fell_activity]
-local plant = professions.activities[forestry.plant_activity]
+local basic_fell = professions.activities[forestry.basic_fell_activity]
+local advanced_fell = professions.activities[forestry.advanced_fell_activity]
+local basic_plant = professions.activities[forestry.basic_plant_activity]
+local advanced_plant = professions.activities[forestry.advanced_plant_activity]
 local activate = professions.activities[forestry.activate_activity]
 local advanced = professions.abilities[forestry.advanced_sapling_ability]
 local advanced_tree = professions.abilities[forestry.advanced_tree_ability]
@@ -159,13 +178,15 @@ add("| --- | --- | ---: |")
 add("| Baum ohne Woodcutting fällen | keine XP | 0 |")
 add("| Moretrees-Baum ohne " .. requirement(advanced_tree) .. " abbauen | gesperrt | 0 |")
 add("| Spielerplatzierten Moretrees-Stamm abbauen | erlaubt | 0 |")
-add("| Baum mit abgeschlossenem Woodcutting-Prozess fällen | "
-    .. professions.branches[fell.branch].title .. "-XP | " .. fell.xp .. " |")
+add("| Standardbaum mit abgeschlossenem Woodcutting-Prozess fällen | "
+    .. professions.branches[basic_fell.branch].title .. "-XP | " .. basic_fell.xp .. " |")
+add("| Moretrees-Baum mit abgeschlossenem Woodcutting-Prozess fällen | "
+    .. professions.branches[advanced_fell.branch].title .. "-XP | " .. advanced_fell.xp .. " |")
 add("| Standardsetzling wachstumsfähig pflanzen | "
-    .. professions.branches[plant.branch].title .. "-XP | " .. plant.xp .. " |")
+    .. professions.branches[basic_plant.branch].title .. "-XP | " .. basic_plant.xp .. " |")
 add("| Moretrees-Setzling ohne " .. requirement(advanced) .. " pflanzen | Setzling ruht | 0 |")
 add("| Moretrees-Setzling mit " .. requirement(advanced) .. " pflanzen | "
-    .. professions.branches[plant.branch].title .. "-XP | " .. plant.xp .. " |")
+    .. professions.branches[advanced_plant.branch].title .. "-XP | " .. advanced_plant.xp .. " |")
 add("| Ruhenden Moretrees-Setzling aktivieren | "
     .. professions.branches[activate.branch].title .. "-XP | " .. activate.xp .. " |")
 add()
@@ -185,11 +206,8 @@ add()
 add("Das Anpflanzen wird nach Kulturgruppe freigeschaltet. Bei der Ernte einer selbst")
 add("gepflanzten, vollständig ausgewachsenen Kultur hängt die XP von der Rangstufe ab.")
 add()
-add("| Verhältnis der Kultur zum eigenen Rang | XP |")
-add("| --- | ---: |")
-add("| aktuelle Rangstufe | 1 |")
-add("| eine Rangstufe niedriger | 0,2 |")
-add("| mindestens zwei Rangstufen niedriger | 0,1 |")
+add("Alle Kulturgruppen haben 1 Grund-XP. Die tatsächliche Gutschrift wird zentral")
+add("mit dem Multiplikator des Landwirtschaftsbaums berechnet.")
 add()
 add("| Rang | Kulturen |")
 add("| --- | --- |")

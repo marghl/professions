@@ -117,6 +117,7 @@ Ist Farming Redo aktiviert, hängt das Anpflanzen von Kulturen vom Rang in
 Landwirtschaft ab. Pfuscher bauen Grundkulturen an, Lehrlinge die regulären
 Feld- und Gemüsekulturen, Gesellen Spezialkulturen und Meister Kaffee, Kakao
 und Vanille. Nur die Ernte einer vollständig ausgewachsenen, selbst gesetzten
-Kultur gibt Landwirtschafts-XP. Kulturen der aktuellen Rangstufe geben 1 XP,
-Kulturen der vorherigen Stufe 0,2 XP und noch niedrigere Kulturen 0,1 XP.
+Kultur gibt Landwirtschafts-XP. Jede Kulturgruppe besitzt 1 Grund-XP. Der
+zentrale Progressionsalgorithmus multipliziert diesen Wert für jede Stufe
+Rangabstand erneut mit 0,5; die Mindestgutschrift beträgt 0,1 XP.
 Landwirtschaftliche Automatisierung ist noch nicht integriert.

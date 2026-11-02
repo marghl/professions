@@ -37,6 +37,10 @@ function professions.register_branch(def)
     assert(not professions.branches[def.id], S("Duplicate branch ID: @1", def.id))
     assert(type(def.title) == "string" and def.title ~= "", S("Branch title missing: @1", def.id))
     assert(type(def.ranks) == "table" and #def.ranks > 0, S("Ranks missing: @1", def.id))
+    def.progression_multiplier = def.progression_multiplier or 0.5
+    assert(type(def.progression_multiplier) == "number"
+        and def.progression_multiplier > 0 and def.progression_multiplier <= 1,
+        S("Invalid progression multiplier in @1", def.id))
     professions.branches[def.id] = def
     table.insert(professions.branch_order, def.id)
 end
@@ -55,6 +59,7 @@ function professions.register_activity(def)
     assert_id(def.id, S("activity ID"))
     assert(not professions.activities[def.id], S("Duplicate activity ID: @1", def.id))
     assert_id(def.branch, S("activity branch ID"))
+    assert_id(def.rank, S("activity rank ID"))
     assert(type(def.title) == "string" and def.title ~= "", S("Activity title missing: @1", def.id))
     assert(type(def.xp) == "number" and def.xp > 0, S("XP must be positive: @1", def.id))
     professions.activities[def.id] = def
@@ -80,6 +85,7 @@ function professions.validate_config()
     for branch_id, branch in pairs(professions.branches) do
         local previous_xp = -1
         local rank_ids = {}
+        local rank_indices = {}
         for index, rank in ipairs(branch.ranks) do
             assert_id(rank.id, S("rank ID in @1", branch_id))
             assert(not rank_ids[rank.id], S("Duplicate rank @1 in @2", rank.id, branch_id))
@@ -89,13 +95,18 @@ function professions.validate_config()
                 S("Rank XP must increase strictly in @1", branch_id))
             previous_xp = rank.xp
             rank_ids[rank.id] = true
+            rank_indices[rank.id] = index
+            rank._index = index
         end
         branch._rank_ids = rank_ids
+        branch._rank_indices = rank_indices
     end
 
     for activity_id, activity in pairs(professions.activities) do
-        assert(professions.branches[activity.branch], S("Activity @1 references unknown branch @2",
-            activity_id, activity.branch))
+        local branch = professions.branches[activity.branch]
+        assert(branch, S("Activity @1 references unknown branch @2", activity_id, activity.branch))
+        assert(branch._rank_ids[activity.rank],
+            S("Activity @1 references unknown rank @2", activity_id, activity.rank))
     end
 
 
@@ -247,14 +258,24 @@ function professions.record_activity(player_or_name, activity_id, context)
         return 0
     end
 
+    local branch = professions.branches[activity.branch]
+    local player_rank = professions.get_rank(player, activity.branch)
+    local player_index = player_rank and branch._rank_indices[player_rank.id]
+    local activity_index = branch._rank_indices[activity.rank]
+    if not player_index or player_index < activity_index then
+        return 0
+    end
+
     context = context or {}
-    local factor = 1
+    local factor = branch.progression_multiplier ^ (player_index - activity_index)
     if activity.repetition ~= false then
         local state = load_activity_state(player)
         local state_key = activity_id .. ":" .. tostring(context.repetition_key or "default")
         local now = os.time()
         local entry
-        factor, entry = repetition_factor(activity, state[state_key], now)
+        local repeat_factor
+        repeat_factor, entry = repetition_factor(activity, state[state_key], now)
+        factor = factor * repeat_factor
         state[state_key] = entry
         save_activity_state(player, state)
     end
@@ -264,8 +285,6 @@ function professions.record_activity(player_or_name, activity_id, context)
     local new_scaled_xp = get_scaled_xp(player, activity.branch) + scaled_reward
     player:get_meta():set_int(xp_key(activity.branch), new_scaled_xp)
     local new_rank = professions.get_rank(player, activity.branch)
-    local branch = professions.branches[activity.branch]
-
     local name = player_name(player)
     core.chat_send_player(name, S("@1: +@2 XP (total @3)", branch.title,
         string.format("%.1f", scaled_reward / XP_SCALE),

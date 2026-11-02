@@ -25,10 +25,10 @@ core.register_on_placenode(function(pos, newnode, placer)
 
     local namespace = newnode.name:match("^([^:]+):")
     if rules.basic_saplings[newnode.name] then
-        professions.record_activity(placer, rules.plant_activity)
+        professions.record_activity(placer, rules.basic_plant_activity)
     elseif namespace == rules.advanced_tree_namespace then
         if professions.can(placer, rules.advanced_sapling_ability) then
-            professions.record_activity(placer, rules.plant_activity)
+            professions.record_activity(placer, rules.advanced_plant_activity)
         else
             local meta = core.get_meta(pos)
             meta:set_int(DORMANT_KEY, 1)

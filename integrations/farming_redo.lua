@@ -83,17 +83,7 @@ core.register_on_dignode(function(pos, oldnode, digger)
 
     if digger and owner == digger:get_player_name() and mature_crops[oldnode.name] == crop_name then
         local ability_id = rules.crop_abilities[crop_name]
-        local crop_level = rules.ability_levels[ability_id]
-        local rank = professions.get_rank(digger, "farming")
-        local rank_level = rank and rules.rank_levels[rank.id]
-        local activity_id
-        if rank_level and crop_level and rank_level == crop_level then
-            activity_id = rules.harvest_activities.current
-        elseif rank_level and crop_level and rank_level == crop_level + 1 then
-            activity_id = rules.harvest_activities.previous
-        elseif rank_level and crop_level and rank_level > crop_level + 1 then
-            activity_id = rules.harvest_activities.lower
-        end
+        local activity_id = rules.crop_activities[ability_id]
         if activity_id then
             professions.record_activity(digger, activity_id)
         end
