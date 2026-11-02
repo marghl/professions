@@ -153,9 +153,9 @@ kombiniert werden:
 Niedrige Grundkenntnisse in vielen Zweigen sollen von dieser
 Spezialisierungsbremse kaum oder gar nicht betroffen sein. Der zusaetzliche
 Aufwand soll vor allem ab Geselle, deutlich bei Meister und sehr stark bei
-Ingenieur einsetzen. Die genauen Kurven, Multiplikatoren und die Frage, ob nur
-XP-Anforderungen steigen oder zugleich XP-Ertraege sinken, sind noch zu
-planen.
+Ingenieur einsetzen. Die zweiguebergreifende Spezialisierungsbremse bleibt
+noch zu planen. Die rangabhaengige Verringerung des XP-Ertrags innerhalb eines
+Taetigkeitsbaums ist dagegen nachfolgend verbindlich festgelegt.
 
 Rang und formaler Abschluss bleiben unterscheidbar: Praktische Zweig-XP kann
 den erforderlichen Erfahrungsstand liefern; Gesellenbrief, Meisterbrief oder
@@ -287,11 +287,61 @@ Ergebnis vergeben werden, nicht bloss fuer einen Klick oder Versuch. Beispiele:
 - Minecart: nach einer abgeschlossenen, sinnvoll messbaren Transportleistung
 - Maschinen: nach einem abgeschlossenen Produktionsvorgang
 
-Die spaetere Berechnung folgt konzeptionell diesem Schema:
+### Verbindliche zentrale Rangprogression fuer Taetigkeiten
+
+Jeder Taetigkeitsbaum besitzt genau einen Progressionsmultiplikator `M`. Der
+Standardwert ist `0.5`. Der Multiplikator gehoert zum Taetigkeitsbaum und
+nicht zu einer einzelnen Taetigkeit. Eine einzelne Taetigkeit definiert nur
+ihren Grund-XP-Wert `X`, ihren Zweig und die Rangstufe, fuer die sie vorgesehen
+ist.
+
+Der Kern berechnet die XP zentral aus der Differenz zwischen der Rangstufe des
+Spielers und der Rangstufe der Taetigkeit:
+
+```text
+N = Rangstufe des Spielers - Rangstufe der Taetigkeit
+```
+
+Eine Taetigkeit oberhalb des Spielerrangs (`N < 0`) ist noch nicht
+freigeschaltet. Fuer eine freigeschaltete Taetigkeit (`N >= 0`) gilt:
+
+```text
+endgueltige XP = max(0.1, X * M ^ N)
+```
+
+Mit dem Standardmultiplikator `M = 0.5` ergibt sich:
+
+| Rangdifferenz | Berechnung | Faktor |
+| ---: | --- | ---: |
+| 0 | `X * 1` | 1 |
+| 1 | `X * 0.5` | 0.5 |
+| 2 | `X * 0.5^2` | 0.25 |
+| 3 | `X * 0.5^3` | 0.125 |
+| n | `X * 0.5^n` | `0.5^n` |
+
+Die Untergrenze betraegt immer 0.1 tatsaechliche XP pro gueltiger
+Taetigkeit, nicht 0.1 als Multiplikator. Bei einem Grundwert von 5 XP greift
+die Untergrenze daher spaeter als bei einem Grundwert von 1 XP. Rundung und
+Speicherung erfolgen weiterhin zentral und deterministisch mit skalierten
+Ganzzahlen.
+
+Rangnamen und die Anzahl der Raenge sind fuer den Algorithmus unerheblich. Der
+Kern verwendet ausschliesslich ihre Reihenfolge im konfigurierten Zweig. Der
+Taetigkeitsbaum darf einen anderen Multiplikator festlegen; fehlt die Angabe,
+wird immer `0.5` verwendet. Integrationen berechnen keine Rangprogression,
+sondern melden ausschliesslich die erfolgreich abgeschlossene Taetigkeit.
+
+Zusaetzliche, voneinander unabhaengige Regeln wie Wiederholungsdaempfung,
+konkrete Qualifikationen oder eine spaetere zweiguebergreifende
+Spezialisierungsbremse koennen danach angewendet werden. Sie duerfen den
+Progressionsmultiplikator nicht in die einzelne Taetigkeitsdefinition
+verschieben.
+
+Das allgemeine Berechnungsschema lautet damit:
 
 ```text
 endgueltige XP = Grundwert
-               * Schwierigkeitsfaktor
+               * Rangprogression des Taetigkeitsbaums
                * Wiederholungsfaktor
                * Spezialisierungsfaktor
                * Kontextfaktor
@@ -380,9 +430,10 @@ konfigurierbare Kulturgruppen aufgeteilt: Grundkulturen fuer Pfuscher,
 regulaere Feld- und Gemuesekulturen fuer Lehrlinge, Spezialkulturen fuer
 Gesellen sowie Kaffee, Kakao und Vanille fuer Meister. Eine vollstaendig
 ausgewachsene Kultur gibt dem Spieler, der sie selbst gepflanzt und geerntet
-hat, rangabhaengige Landwirtschafts-XP: 1 XP fuer die aktuelle Kulturstufe,
-0,2 XP fuer die vorherige und 0,1 XP fuer mindestens zwei Stufen niedrigere
-Kulturen. Fremde oder wild gewachsene Kulturen geben keine XP.
+hat, rangabhaengige Landwirtschafts-XP. Die derzeit implementierten festen
+Werte 1, 0.2 und 0.1 sind ein vorlaeufiger Stand und muessen auf den zentralen
+Algorithmus mit dem Multiplikator des Taetigkeitsbaums umgestellt werden.
+Fremde oder wild gewachsene Kulturen geben keine XP.
 Landwirtschaftliche Automatisierung bleibt einer spaeteren Qualifikation
 vorbehalten.
 
