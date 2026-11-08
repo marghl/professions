@@ -181,6 +181,28 @@ professions.workbench = {
     },
 }
 
+professions.crafting_rules = {
+    default_activity = "crafting.craft.general",
+    tool_activities = {
+        novice = "crafting.craft.tool.novice",
+        apprentice = "crafting.craft.tool.apprentice",
+        journeyman = "crafting.craft.tool.journeyman",
+        master = "crafting.craft.tool.master",
+    },
+    tool_material_ranks = {
+        wood = "novice",
+        stone = "apprentice",
+        steel = "journeyman",
+        bronze = "journeyman",
+        mese = "master",
+        diamond = "master",
+    },
+    special_abilities = {
+        ["professions:woodworking_bench"] = "woodworking_bench.craft",
+        ["moreblocks:circular_saw"] = "moreblocks.circular_saw.craft",
+    },
+}
+
 professions.forestry_rules = {
     basic_tree_namespace = "default",
     basic_saplings = {
@@ -289,11 +311,11 @@ professions.register_activity {
 }
 
 professions.register_activity {
-    id = "crafting.craft.wood_tool",
-    title = S("Craft wooden tool"),
+    id = "crafting.craft.general",
+    title = S("Craft item"),
     branch = "crafting",
     rank = "novice",
-    xp = 5,
+    xp = 0.5,
     repetition = repetition,
 }
 
@@ -302,6 +324,42 @@ professions.register_activity {
     title = S("Craft chest"),
     branch = "crafting",
     rank = "novice",
+    xp = 10,
+    repetition = repetition,
+}
+
+professions.register_activity {
+    id = "crafting.craft.tool.novice",
+    title = S("Craft novice tool"),
+    branch = "crafting",
+    rank = "novice",
+    xp = 2,
+    repetition = repetition,
+}
+
+professions.register_activity {
+    id = "crafting.craft.tool.apprentice",
+    title = S("Craft apprentice tool"),
+    branch = "crafting",
+    rank = "apprentice",
+    xp = 3,
+    repetition = repetition,
+}
+
+professions.register_activity {
+    id = "crafting.craft.tool.journeyman",
+    title = S("Craft journeyman tool"),
+    branch = "crafting",
+    rank = "journeyman",
+    xp = 5,
+    repetition = repetition,
+}
+
+professions.register_activity {
+    id = "crafting.craft.tool.master",
+    title = S("Craft master tool"),
+    branch = "crafting",
+    rank = "master",
     xp = 10,
     repetition = repetition,
 }

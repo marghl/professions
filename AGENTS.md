@@ -384,15 +384,24 @@ erst in spaeteren Ausbaustufen getestet.
 
 ### Vorlaeufige XP-Quellen
 
-Einige einfache Standardrezepte liefern Handwerks-XP:
+Jeder erfolgreiche normale Craft liefert Handwerks-XP. Ein nicht gesondert
+eingestuftes Ergebnis liefert vorlaeufig 0,5 Grund-XP. Einige einfache
+Standardrezepte behalten eigene Werte:
 
 | Erfolgreiche Taetigkeit | Grund-XP |
 | --- | ---: |
 | Holzbretter herstellen | 1 |
 | Stoecke herstellen | 1 |
 | Fackeln herstellen | 2 |
-| Holzwerkzeug herstellen | 5 |
+| Holzwerkzeug herstellen | 2 |
 | Truhe herstellen | 10 |
+
+Die Werkzeugprogression ist vorlaeufig nach Material gestaffelt: Holz ist ab
+Pfuscher, Stein ab Lehrling, Stahl und Bronze ab Geselle sowie Mese und Diamant
+ab Meister herstellbar. Werkzeuge aus anderen Mods, deren Material nicht
+erkannt wird, gelten zunaechst als Meisterwerkzeuge. Meister duerfen damit alle
+registrierten Werkzeuge herstellen. Werkzeug-Crafts liefern je nach Stufe 2,
+3, 5 beziehungsweise 10 Grund-XP.
 
 XP wird erst nach einem tatsaechlich erfolgreichen Craft gutgeschrieben. Die
 Wiederholungszaehler werden pro Rezept beziehungsweise sinnvoll definierter

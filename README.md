@@ -50,9 +50,23 @@ Alle fünf verwenden dieselben Ränge und XP-Schwellen.
 | Geselle | 300 |
 | Meister | 700 |
 
-Handwerks-XP entstehen beim erfolgreichen Herstellen von Holzbrettern,
-Stöcken, Fackeln, Holzwerkzeugen und Truhen. Häufige Wiederholungen desselben
-Rezepts liefern innerhalb einer Stunde zunehmend weniger XP.
+Jeder erfolgreiche normale Craft gibt Handwerks-XP. Unbekannte beziehungsweise
+einfache Gegenstände geben 0,5 Grund-XP; Holzbretter, Stöcke und Fackeln
+behalten ihre eigenen Werte. Häufige Wiederholungen desselben Ergebnisses
+liefern innerhalb einer Stunde zunehmend weniger XP.
+
+Werkzeuge werden nach Material freigeschaltet und geben ihrer Stufe
+entsprechende Grund-XP:
+
+| Rang | Werkzeugmaterial | Grund-XP |
+| --- | --- | ---: |
+| Pfuscher | Holz | 2 |
+| Lehrling | Stein | 3 |
+| Geselle | Stahl und Bronze | 5 |
+| Meister | Mese, Diamant und unbekannte Mod-Werkzeuge | 10 |
+
+Damit darf ein Meister alle registrierten Werkzeuge herstellen. Werkzeuge mit
+unbekanntem Material werden sicherheitshalber als Meisterwerkzeug behandelt.
 
 ## Befehle
 

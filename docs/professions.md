@@ -45,8 +45,12 @@ Berufssystem
 | Holzbretter herstellen | `crafting.craft.planks` | Handwerk | Pfuscher | 1 | aktiv |
 | Stöcke herstellen | `crafting.craft.sticks` | Handwerk | Pfuscher | 1 | aktiv |
 | Fackeln herstellen | `crafting.craft.torches` | Handwerk | Pfuscher | 2 | aktiv |
-| Holzwerkzeug herstellen | `crafting.craft.wood_tool` | Handwerk | Pfuscher | 5 | aktiv |
+| Gegenstand herstellen | `crafting.craft.general` | Handwerk | Pfuscher | 0.5 | aktiv |
 | Truhe herstellen | `crafting.craft.chest` | Handwerk | Pfuscher | 10 | aktiv |
+| Pfuscher-Werkzeug herstellen | `crafting.craft.tool.novice` | Handwerk | Pfuscher | 2 | aktiv |
+| Lehrlingswerkzeug herstellen | `crafting.craft.tool.apprentice` | Handwerk | Lehrling | 3 | aktiv |
+| Gesellenwerkzeug herstellen | `crafting.craft.tool.journeyman` | Handwerk | Geselle | 5 | aktiv |
+| Meisterwerkzeug herstellen | `crafting.craft.tool.master` | Handwerk | Meister | 10 | aktiv |
 | Grundkultur ernten | `farming.harvest.basic` | Landwirtschaft | Pfuscher | 1 | keine |
 | Fortgeschrittene Kultur ernten | `farming.harvest.advanced` | Landwirtschaft | Lehrling | 1 | keine |
 | Spezialkultur ernten | `farming.harvest.specialty` | Landwirtschaft | Geselle | 1 | keine |
